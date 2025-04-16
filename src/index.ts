@@ -3,6 +3,8 @@ import express, {
   Response,
 } from 'express';
 
+import { ENV } from './config/env.config';
+
 const app = express();
 
 app.get(
@@ -12,8 +14,8 @@ app.get(
   }
 );
 
-app.listen(3000, () => {
+app.listen(ENV.PORT, () => {
   console.log(
-    'Server is running on port 3000'
+    `Server is running on port ${ENV.PORT}`
   );
 });
