@@ -1,4 +1,6 @@
-import express, { Application } from 'express';
+import express, {
+  Application,
+} from 'express';
 import { globalErrorHandler } from './utils/global-error';
 
 export class App {
@@ -14,7 +16,9 @@ export class App {
     this.app.use(express.json());
 
     this.app.use((req, _res, next) => {
-      console.info(`New request to ${req.path}`);
+      console.info(
+        `New request to ${req.path}`
+      );
       next();
     });
   }
@@ -23,7 +27,13 @@ export class App {
     this.app.use(globalErrorHandler);
   }
 
-  public listen(port: number, callback: () => void) {
-    return this.app.listen(port, callback);
+  public listen(
+    port: number,
+    callback: () => void
+  ) {
+    return this.app.listen(
+      port,
+      callback
+    );
   }
 }

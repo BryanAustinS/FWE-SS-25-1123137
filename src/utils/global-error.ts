@@ -1,4 +1,8 @@
-import { NextFunction, Request, Response } from 'express';
+import {
+  NextFunction,
+  Request,
+  Response,
+} from 'express';
 
 export function globalErrorHandler(
   err: Error,
@@ -6,7 +10,10 @@ export function globalErrorHandler(
   res: Response,
   _next: NextFunction
 ) {
-  console.error('Unhandled error:', err);
+  console.error(
+    'Unhandled error:',
+    err
+  );
   res.status(500).json({
     errors: ['Internal server error'],
   });
