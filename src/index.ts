@@ -1,15 +1,10 @@
-import express, {
-  Request,
-  Response,
-} from 'express';
+import { DI, initializeDI } from './dependency-injection';
 
-import { ENV } from './config/env.config';
+initializeDI();
 
-const app = express();
-
-app.get(
-  '/',
-  (_req: Request, res: Response) => {
-    res.send('Hello World!!!');
-  }
-);
+try {
+  DI.server.start();
+} catch (error) {
+  console.error('Error starting server:', error);
+  process.exit(1);
+}
