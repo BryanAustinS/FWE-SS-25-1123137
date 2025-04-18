@@ -27,6 +27,18 @@ export class TripController {
         }
     }
 
+    getId = async (req: Request, res: Response) => {
+        try {
+            const id = req.params.id;
+
+            const result = await this.tripRepository.getTripById(id);
+            return res.status(200).json(result);
+        } catch (error: any) {
+            console.error('Error fetching trip by id: ', error);
+            return res.status(500).json({ error: 'Failed to fetch trip by id', details: error.message});
+        }
+    }
+
     getByName = async (req: Request, res: Response) => {
         try {
             const name = req.query.name;
@@ -44,7 +56,7 @@ export class TripController {
     }
 
     getByDestination = async (req: Request, res: Response) => {
-    
+        
     }
 
     getByDate = async (req: Request, res: Response) => {

@@ -25,15 +25,8 @@ export const DI = {} as {
 };
 
 export function initializeDI() {
-    // Initialize App   
-    DI.app = new App(DI.routes);
-    DI.server = new Server(DI.app, ENV);
-
     // Initialize Database
     DI.db = db;
-
-    // Initialize Routes
-    DI.routes = new Routes(DI.controller.trip);
 
     // Initialize Repositories
     DI.repositories = {
@@ -44,8 +37,14 @@ export function initializeDI() {
     // Initialize Controller
     DI.controller = {
         trip: new TripController(DI.repositories.trip)
-
     }
+
+    // Initialize Routes
+    DI.routes = new Routes(DI.controller.trip);
+
+    // Initialize App   
+    DI.app = new App(DI.routes);
+    DI.server = new Server(DI.app, ENV);
 }   
 
 
