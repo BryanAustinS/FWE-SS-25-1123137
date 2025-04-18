@@ -42,7 +42,7 @@ export class Routes {
         });
 
         // Delete
-        this.router.put('/trip/:id', (req, res) => {
+        this.router.delete('/trip/:id', (req, res) => {
             this.tripController.delete(req, res);
         });
     }
