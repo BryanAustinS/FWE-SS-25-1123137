@@ -7,7 +7,9 @@ import { Routes } from './routes/routes';
 export class App {
   private app: Application;
 
-  constructor(private readonly routes: Routes) {
+  constructor(
+    private readonly routes: Routes
+  ) {
     this.app = express();
     this._registerMiddlewares();
     this._registerErrorHandlers();
@@ -26,7 +28,10 @@ export class App {
   }
 
   private _registerRoutes() {
-    this.app.use('/api', this.routes.getRouter());
+    this.app.use(
+      '/api',
+      this.routes.getRouter()
+    );
   }
 
   private _registerErrorHandlers() {

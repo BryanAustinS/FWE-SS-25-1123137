@@ -19,11 +19,15 @@ export class Server {
       }
     );
 
-    this._handleUnexpectedErrors(server);
+    this._handleUnexpectedErrors(
+      server
+    );
     this._handleSigterm(server);
   };
 
-  private _handleExit = (server: http.Server) => {
+  private _handleExit = (
+    server: http.Server
+  ) => {
     if (server) {
       server.close(() => {
         console.info('Server closed');
@@ -34,20 +38,32 @@ export class Server {
     }
   };
 
-  private _handleUnexpectedErrors = (server: http.Server) => {
+  private _handleUnexpectedErrors = (
+    server: http.Server
+  ) => {
     /**
      * @param error - an unexpected error to handle
      */
-    const handler = (error: unknown) => {
+    const handler = (
+      error: unknown
+    ) => {
       console.error(error);
       this._handleExit(server);
     };
 
-    process.on('uncaughtException', handler);
-    process.on('unhandledRejection', handler);
+    process.on(
+      'uncaughtException',
+      handler
+    );
+    process.on(
+      'unhandledRejection',
+      handler
+    );
   };
 
-  private _handleSigterm = (server: http.Server) => {
+  private _handleSigterm = (
+    server: http.Server
+  ) => {
     process.on('SIGTERM', () => {
       console.info('SIGTERM received');
       if (server) {

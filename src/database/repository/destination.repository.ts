@@ -31,7 +31,6 @@ export class DestinationRepository {
 
     async deleteDestination(id: string) {
         return await this.database.delete(destination).where(eq(destination.id, id)).returning();
-
     }
 
 
