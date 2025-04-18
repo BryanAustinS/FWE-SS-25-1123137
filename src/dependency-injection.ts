@@ -9,7 +9,7 @@ import { Server } from './server';
 import { TripRepository } from './database/repository/trip.repository';
 import { DestinationRepository } from './database/repository/destination.repository';
 import { TripController } from './controller/trip.controller';
-//import { DestinationController } from './controller/destination.controller';
+import { DestinationController } from './controller/destination.controller';
 
 export const DI = {} as {
   app: App;
@@ -22,7 +22,7 @@ export const DI = {} as {
   };
   controller: {
     trip: TripController;
-    // destination: DestinationController;
+    destination: DestinationController;
   };
 };
 
@@ -42,11 +42,15 @@ export function initializeDI() {
     trip: new TripController(
       DI.repositories.trip
     ),
+    destination: new DestinationController(
+        DI.repositories.destination
+    )
   };
 
   // Initialize Routes
   DI.routes = new Routes(
-    DI.controller.trip
+    DI.controller.trip,
+    DI.controller.destination
   );
 
   // Initialize App

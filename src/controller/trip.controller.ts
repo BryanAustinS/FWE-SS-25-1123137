@@ -96,7 +96,7 @@ export class TripController {
     res: Response
   ) => {
     try {
-      const name = req.query.name;
+      const name = req.params.name;
 
       if (
         !name ||
@@ -168,7 +168,7 @@ export class TripController {
           tripData
         );
       return res
-        .status(201)
+        .status(200)
         .json(result);
     } catch (error: any) {
       console.error(

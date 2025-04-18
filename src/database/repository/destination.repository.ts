@@ -21,7 +21,7 @@ export class DestinationRepository {
         return await this.database.select().from(destination).where(eq(destination.name, name));
     }
 
-    async getDestinationByNameContains(name: String){
+    async getDestinationByNameContains(name: string){
         return await this.database.select().from(destination).where(ilike(destination.name, `%${name}%`));
     }
 

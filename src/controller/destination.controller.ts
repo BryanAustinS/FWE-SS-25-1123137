@@ -136,7 +136,7 @@ export class DestinationController {
     res: Response
   ) => {
     try {
-      const name = req.params.name;
+      const name = req.params.namecontains;
 
       if (
         !name ||
@@ -146,11 +146,11 @@ export class DestinationController {
           .status(400)
           .json({
             error:
-              'Invalid name parameter ',
+              'Invalid name parameter',
           });
       }
       const result =
-        await this.destinationRepository.getDestinationByName(
+        await this.destinationRepository.getDestinationByNameContains(
           name
         );
       return res
@@ -158,14 +158,14 @@ export class DestinationController {
         .json(result);
     } catch (error: any) {
       console.error(
-        'Error in fetching destination by name contains: ',
+        'Error in fetching destination containing name: ',
         error
       );
       return res
         .status(500)
         .json({
           error:
-            'Failed to fetch destination by name contains',
+            'Failed to fetch destination containing name',
           details: error.message,
         });
     }
