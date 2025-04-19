@@ -48,7 +48,8 @@ export function initializeDI() {
   // Initialize Controller
   DI.controller = {
     trip: new TripController(
-      DI.repositories.trip
+      DI.repositories.trip,
+      DI.services.unsplash
     ),
     destination:
       new DestinationController(

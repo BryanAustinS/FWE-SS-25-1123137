@@ -3,10 +3,12 @@ import {
   Response,
 } from 'express';
 import * as TripRepository from '../database/repository/trip.repository';
+import { UnsplashService } from '../unsplash.service';
 
 export class TripController {
   constructor(
-    private readonly tripRepository: TripRepository.TripRepository
+    private readonly tripRepository: TripRepository.TripRepository,
+    private readonly unsplashService: UnsplashService
   ) {}
 
   create = async (
@@ -15,6 +17,11 @@ export class TripController {
   ) => {
     try {
       const tripData = req.body;
+
+      if (!tripData.imageUrl && tripData.name){
+        tripData.imageUrl = await this.unsplashService.getTripImage(tripData.name);
+      }
+      
       const result =
         await this.tripRepository.createTrip(
           tripData
