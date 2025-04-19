@@ -14,10 +14,8 @@ export const destination = pgTable(
     name: varchar({
       length: 256,
     }).notNull(),
-    description: text(),
     startDate: text().notNull(),
     endDate: date().notNull(),
-    imageUrl: text(),
     activities: text(),
   }
 );
