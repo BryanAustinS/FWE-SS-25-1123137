@@ -60,14 +60,14 @@ export class Routes {
     );
 
     this.router.get(
-        '/trip/:id',
-        (req, res) => {
-          this.tripController.getId(
-            req,
-            res
-          );
-        }
-      );
+      '/trip/:id',
+      (req, res) => {
+        this.tripController.getId(
+          req,
+          res
+        );
+      }
+    );
 
     // Update
     this.router.put(
@@ -94,79 +94,77 @@ export class Routes {
     // Destination Routes
     // Create
     this.router.post(
-        '/destination',
-        (req, res) => {
-            this.destinationController.create(
-                req, 
-                res
-            );
-        }
+      '/destination',
+      (req, res) => {
+        this.destinationController.create(
+          req,
+          res
+        );
+      }
     );
 
     // Read
     this.router.get(
-        '/destination',
-        (req, res) => {
-            this.destinationController.getAll(
-                req, 
-                res
-            );
-        }
+      '/destination',
+      (req, res) => {
+        this.destinationController.getAll(
+          req,
+          res
+        );
+      }
     );
 
     this.router.get(
-        '/destination/name/:name',
-        (req, res) => {
-            this.destinationController.getName(
-                req,
-                res
-            );
-        }
+      '/destination/name/:name',
+      (req, res) => {
+        this.destinationController.getName(
+          req,
+          res
+        );
+      }
     );
 
     this.router.get(
-        '/destination/namecontains/:namecontains',
-        (req, res) => {
-            this.destinationController.getNameContains(
-                req,
-                res
-            );
-        }
+      '/destination/namecontains/:namecontains',
+      (req, res) => {
+        this.destinationController.getNameContains(
+          req,
+          res
+        );
+      }
     );
 
     this.router.get(
-        '/destination/:id',
-        (req, res) => {
-            this.destinationController.getId(
-                req, 
-                res
-            );
-        }
+      '/destination/:id',
+      (req, res) => {
+        this.destinationController.getId(
+          req,
+          res
+        );
+      }
     );
 
     // Update
     this.router.put(
-        '/destination/:id',
-        (req, res) => {
-            this.destinationController.update(
-                req,
-                res
-            );
-        }
+      '/destination/:id',
+      (req, res) => {
+        this.destinationController.update(
+          req,
+          res
+        );
+      }
     );
 
     // Delete
     this.router.delete(
-        '/destination/:id',
-        (req, res) => {
-            this.destinationController.delete(
-                req,
-                res
-            );
-        }
+      '/destination/:id',
+      (req, res) => {
+        this.destinationController.delete(
+          req,
+          res
+        );
+      }
     );
-    
-
   }
 
   public getRouter() {

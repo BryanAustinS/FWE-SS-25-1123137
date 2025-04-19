@@ -3,36 +3,74 @@ import { destination } from '../schema/destination.schema';
 import { eq, ilike } from 'drizzle-orm';
 
 export class DestinationRepository {
-    constructor (private readonly database: Database) {}
+  constructor(
+    private readonly database: Database
+  ) {}
 
-    async createDestination (data: typeof destination.$inferInsert) {
-        return await this.database.insert(destination).values(data).returning();
-    }
-    
-    async getAllDestination() {
-        return await this.database.select().from(destination);
-    }
+  async createDestination(
+    data: typeof destination.$inferInsert
+  ) {
+    return await this.database
+      .insert(destination)
+      .values(data)
+      .returning();
+  }
 
-    async getDestinationById(id: string){
-        return await this.database.select().from(destination).where(eq(destination.id, id));
-    }
+  async getAllDestination() {
+    return await this.database
+      .select()
+      .from(destination);
+  }
 
-    async getDestinationByName(name: string){
-        return await this.database.select().from(destination).where(eq(destination.name, name));
-    }
+  async getDestinationById(id: string) {
+    return await this.database
+      .select()
+      .from(destination)
+      .where(eq(destination.id, id));
+  }
 
-    async getDestinationByNameContains(name: string){
-        return await this.database.select().from(destination).where(ilike(destination.name, `%${name}%`));
-    }
+  async getDestinationByName(
+    name: string
+  ) {
+    return await this.database
+      .select()
+      .from(destination)
+      .where(
+        eq(destination.name, name)
+      );
+  }
 
-    async updateDestination(id: string, data: Partial<typeof destination.$inferInsert>) { 
-      return await this.database.update(destination).set(data).where(eq(destination.id, id)).returning();
-    }
+  async getDestinationByNameContains(
+    name: string
+  ) {
+    return await this.database
+      .select()
+      .from(destination)
+      .where(
+        ilike(
+          destination.name,
+          `%${name}%`
+        )
+      );
+  }
 
-    async deleteDestination(id: string) {
-        return await this.database.delete(destination).where(eq(destination.id, id)).returning();
-    }
+  async updateDestination(
+    id: string,
+    data: Partial<
+      typeof destination.$inferInsert
+    >
+  ) {
+    return await this.database
+      .update(destination)
+      .set(data)
+      .where(eq(destination.id, id))
+      .returning();
+  }
 
-
+  async deleteDestination(id: string) {
+    return await this.database
+      .delete(destination)
+      .where(eq(destination.id, id))
+      .returning();
+  }
 }
-

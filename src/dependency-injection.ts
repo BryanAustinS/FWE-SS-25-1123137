@@ -42,9 +42,10 @@ export function initializeDI() {
     trip: new TripController(
       DI.repositories.trip
     ),
-    destination: new DestinationController(
+    destination:
+      new DestinationController(
         DI.repositories.destination
-    )
+      ),
   };
 
   // Initialize Routes

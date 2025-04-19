@@ -27,13 +27,10 @@ export class TripController {
         'Error creating trip:',
         error
       );
-      return res
-        .status(500)
-        .json({
-          error:
-            'Failed to create trip',
-          details: error.message,
-        });
+      return res.status(500).json({
+        error: 'Failed to create trip',
+        details: error.message,
+      });
     }
   };
 
@@ -52,13 +49,11 @@ export class TripController {
         'Error fetching trips:',
         error
       );
-      return res
-        .status(500)
-        .json({
-          error:
-            'Failed to fetch all trips',
-          details: error.message,
-        });
+      return res.status(500).json({
+        error:
+          'Failed to fetch all trips',
+        details: error.message,
+      });
     }
   };
 
@@ -81,13 +76,11 @@ export class TripController {
         'Error fetching trip by id: ',
         error
       );
-      return res
-        .status(500)
-        .json({
-          error:
-            'Failed to fetch trip by id',
-          details: error.message,
-        });
+      return res.status(500).json({
+        error:
+          'Failed to fetch trip by id',
+        details: error.message,
+      });
     }
   };
 
@@ -102,12 +95,10 @@ export class TripController {
         !name ||
         typeof name !== 'string'
       ) {
-        return res
-          .status(400)
-          .json({
-            error:
-              'Invalid name parameter',
-          });
+        return res.status(400).json({
+          error:
+            'Invalid name parameter',
+        });
       }
 
       const result =
@@ -122,13 +113,11 @@ export class TripController {
         'Error fetching trip by name:',
         error
       );
-      return res
-        .status(500)
-        .json({
-          error:
-            'Failed to fetch trip by name',
-          details: error.message,
-        });
+      return res.status(500).json({
+        error:
+          'Failed to fetch trip by name',
+        details: error.message,
+      });
     }
   };
 
@@ -155,11 +144,9 @@ export class TripController {
           id
         );
       if (!trip) {
-        return res
-          .status(404)
-          .json({
-            error: 'Trip not found',
-          });
+        return res.status(404).json({
+          error: 'Trip not found',
+        });
       }
 
       const result =
@@ -175,13 +162,10 @@ export class TripController {
         'Error updating trip:',
         error
       );
-      return res
-        .status(500)
-        .json({
-          error:
-            'Failed to update trip',
-          details: error.message,
-        });
+      return res.status(500).json({
+        error: 'Failed to update trip',
+        details: error.message,
+      });
     }
   };
 
@@ -197,11 +181,9 @@ export class TripController {
           id
         );
       if (!trip) {
-        return res
-          .status(404)
-          .json({
-            error: 'Trip not found',
-          });
+        return res.status(404).json({
+          error: 'Trip not found',
+        });
       }
 
       const result =
@@ -216,13 +198,10 @@ export class TripController {
         'Error deleting trip: ',
         error
       );
-      return res
-        .status(500)
-        .json({
-          error:
-            'Failed to delete trip',
-          details: error.message,
-        });
+      return res.status(500).json({
+        error: 'Failed to delete trip',
+        details: error.message,
+      });
     }
   };
 }

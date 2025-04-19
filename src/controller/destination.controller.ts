@@ -27,13 +27,11 @@ export class DestinationController {
         'Error creating destination:',
         error
       );
-      return res
-        .status(500)
-        .json({
-          error:
-            'Failed to create destination',
-          details: error.message,
-        });
+      return res.status(500).json({
+        error:
+          'Failed to create destination',
+        details: error.message,
+      });
     }
   };
 
@@ -52,13 +50,11 @@ export class DestinationController {
         'Error fetching destination: ',
         error
       );
-      return res
-        .status(500)
-        .json({
-          error:
-            'Failed to fetch all destinations',
-          details: error.message,
-        });
+      return res.status(500).json({
+        error:
+          'Failed to fetch all destinations',
+        details: error.message,
+      });
     }
   };
 
@@ -81,13 +77,11 @@ export class DestinationController {
         'Error in fetching destination by id: ',
         error
       );
-      return res
-        .status(500)
-        .json({
-          error:
-            'Failed to fetch destination by id',
-          details: error.message,
-        });
+      return res.status(500).json({
+        error:
+          'Failed to fetch destination by id',
+        details: error.message,
+      });
     }
   };
 
@@ -102,12 +96,10 @@ export class DestinationController {
         !name ||
         typeof name !== 'string'
       ) {
-        return res
-          .status(400)
-          .json({
-            error:
-              'Invalid name parameter',
-          });
+        return res.status(400).json({
+          error:
+            'Invalid name parameter',
+        });
       }
       const result =
         await this.destinationRepository.getDestinationByName(
@@ -121,13 +113,11 @@ export class DestinationController {
         'Error in fetching destination by name: ',
         error
       );
-      return res
-        .status(500)
-        .json({
-          error:
-            'Failed to fetch destination by name',
-          details: error.message,
-        });
+      return res.status(500).json({
+        error:
+          'Failed to fetch destination by name',
+        details: error.message,
+      });
     }
   };
 
@@ -136,18 +126,17 @@ export class DestinationController {
     res: Response
   ) => {
     try {
-      const name = req.params.namecontains;
+      const name =
+        req.params.namecontains;
 
       if (
         !name ||
         typeof name !== 'string'
       ) {
-        return res
-          .status(400)
-          .json({
-            error:
-              'Invalid name parameter',
-          });
+        return res.status(400).json({
+          error:
+            'Invalid name parameter',
+        });
       }
       const result =
         await this.destinationRepository.getDestinationByNameContains(
@@ -161,13 +150,11 @@ export class DestinationController {
         'Error in fetching destination containing name: ',
         error
       );
-      return res
-        .status(500)
-        .json({
-          error:
-            'Failed to fetch destination containing name',
-          details: error.message,
-        });
+      return res.status(500).json({
+        error:
+          'Failed to fetch destination containing name',
+        details: error.message,
+      });
     }
   };
 
@@ -184,12 +171,10 @@ export class DestinationController {
           id
         );
       if (!destination) {
-        return res
-          .status(404)
-          .json({
-            error:
-              'Destination not found ',
-          });
+        return res.status(404).json({
+          error:
+            'Destination not found ',
+        });
       }
 
       const result =
@@ -205,13 +190,11 @@ export class DestinationController {
         'Error in updating destination: ',
         error
       );
-      return res
-        .status(500)
-        .json({
-          error:
-            'Failed to update destination',
-          details: error.message,
-        });
+      return res.status(500).json({
+        error:
+          'Failed to update destination',
+        details: error.message,
+      });
     }
   };
 
@@ -233,13 +216,11 @@ export class DestinationController {
         'Error in deleting destination',
         error
       );
-      return res
-        .status(500)
-        .json({
-          error:
-            'Failed to delete destination',
-          details: error.message,
-        });
+      return res.status(500).json({
+        error:
+          'Failed to delete destination',
+        details: error.message,
+      });
     }
   };
 }
