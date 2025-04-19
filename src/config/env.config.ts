@@ -8,6 +8,8 @@ const envSchema = z.object({
     .int()
     .positive()
     .default(3000),
+  UNSPLASH_ACCESS_KEY: z.string().min(1),
+  UNSPLASH_SECRET_KEY: z.string().min(1),
 });
 
 export const ENV = envSchema.parse(
