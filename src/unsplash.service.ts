@@ -16,7 +16,7 @@ export class UnsplashService {
         try {
             console.log(`Searching Unsplash for: ${query}`);
             const result = await unsplashApi.search.getPhotos({
-                query,
+                query: query,
                 perPage: count,
                 orientation: 'landscape',
             });
@@ -37,7 +37,7 @@ export class UnsplashService {
 
     async getTripImage(tripName: string): Promise<string | null> {
         try {
-            const images = await this.searchImage(`${tripName} travel vacation`);
+            const images = await this.searchImage(`${tripName}`);
             return images[0];
         } catch (error){
             console.error('Failed to get Trip image: ', error);
