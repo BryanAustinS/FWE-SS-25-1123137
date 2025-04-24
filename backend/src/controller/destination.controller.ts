@@ -3,6 +3,7 @@ import {
   Response,
 } from 'express';
 import * as DestinationRepository from '../database/repository/destination.repository';
+import { createDestinationSchema, updateDestinationSchema } from '../validation/validation';
 
 export class DestinationController {
   constructor(
@@ -15,9 +16,10 @@ export class DestinationController {
   ) => {
     try {
       const destinationData = req.body;
+      const validatedData = createDestinationSchema.parse(destinationData);
       const result =
         await this.destinationRepository.createDestination(
-          destinationData
+          validatedData
         );
       return res
         .status(201)
@@ -177,10 +179,12 @@ export class DestinationController {
         });
       }
 
+      const validatedData = updateDestinationSchema.parse(destinationData)
+
       const result =
         await this.destinationRepository.updateDestination(
           id,
-          destinationData
+          validatedData
         );
       return res
         .status(200)

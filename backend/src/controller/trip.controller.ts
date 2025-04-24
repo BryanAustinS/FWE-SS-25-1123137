@@ -4,6 +4,7 @@ import {
 } from 'express';
 import * as TripRepository from '../database/repository/trip.repository';
 import { UnsplashService } from '../unsplash.service';
+import { createTripSchema, updateTripSchema } from '../validation/validation';
 
 export class TripController {
   constructor(
@@ -21,10 +22,12 @@ export class TripController {
       if (!tripData.imageUrl && tripData.name){
         tripData.imageUrl = await this.unsplashService.getTripImage(tripData.name);
       }
+
+      const validatedData = createTripSchema.parse(tripData);
       
       const result =
         await this.tripRepository.createTrip(
-          tripData
+          validatedData
         );
       return res
         .status(201)
@@ -156,10 +159,12 @@ export class TripController {
         });
       }
 
+      const validatedData = updateTripSchema.parse(tripData);
+
       const result =
         await this.tripRepository.updateTrip(
           id,
-          tripData
+          validatedData
         );
       return res
         .status(200)
