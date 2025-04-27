@@ -1,0 +1,11 @@
+apis/DefaultApi.ts
+apis/index.ts
+index.ts
+models/Destination.ts
+models/DestinationInput.ts
+models/DestinationUpdate.ts
+models/Trip.ts
+models/TripInput.ts
+models/TripUpdate.ts
+models/index.ts
+runtime.ts

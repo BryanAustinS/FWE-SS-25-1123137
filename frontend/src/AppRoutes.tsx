@@ -1,6 +1,5 @@
-import { Navigate, Route, Routes, RouteProps, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, RouteProps } from 'react-router-dom'
 import  HomePage  from './pages/HomePage.tsx';
-import React from 'react'
 
 export type RouteConfig = RouteProps & {
     path: string;

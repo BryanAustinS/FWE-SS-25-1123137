@@ -1,0 +1,406 @@
+openapi: 3.0.0
+info:
+  title: Trip Planner API
+  version: 1.0.0
+  description: API for managing trips
+paths:
+  /api/trip:
+    get:
+      summary: Get all trips
+      operationId: getAllTrips
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trip'
+    post:
+      summary: Create a trip
+      operationId: createTrip
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TripInput'
+      responses:
+        '201':
+          description: Trip created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+  /api/trip/name/{name}:
+    get:
+      summary: Find trips by name
+      description: Returns trips with an exact name match
+      operationId: getTripByName
+      parameters:
+        - name: name
+          in: path
+          description: Name to search for
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trip'
+  /api/trip/date/{date}:
+    get:
+      summary: Find trips by date
+      description: Returns trips matching a given date
+      operationId: getTripByDate
+      parameters:
+        - name: date
+          in: path
+          description: Date to search for
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trip'
+  /api/trip/{id}:
+    get:
+      summary: Get a trip by ID
+      operationId: getTripById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+    put:
+      summary: Update a trip
+      operationId: updateTrip
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TripUpdate'
+      responses:
+        '200':
+          description: Trip updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+    delete:
+      summary: Delete a trip
+      operationId: deleteTrip
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Trip deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+  
+  # Destination endpoints
+  /api/destination:
+    get:
+      summary: Get all destinations
+      operationId: getAllDestinations
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Destination'
+    post:
+      summary: Create a destination
+      operationId: createDestination
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DestinationInput'
+      responses:
+        '201':
+          description: Destination created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination'
+  /api/destination/name/{name}:
+    get:
+      summary: Find destinations by exact name
+      operationId: getDestinationByName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Destination'
+  /api/destination/namecontains/{namecontains}:
+    get:
+      summary: Find destinations containing name
+      operationId: getDestinationByNameContains
+      parameters:
+        - name: namecontains
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Destination'
+  /api/destination/{id}:
+    get:
+      summary: Get a destination by ID
+      operationId: getDestinationById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination'
+    put:
+      summary: Update a destination
+      operationId: updateDestination
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DestinationUpdate'
+      responses:
+        '200':
+          description: Destination updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination'
+    delete:
+      summary: Delete a destination
+      operationId: deleteDestination
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Destination deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Destination'
+
+components:
+  schemas:
+    Trip:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        participants:
+          type: integer
+        imageUrl:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - startDate
+        - endDate
+        - participants
+        - createdAt
+        - updatedAt
+    TripInput:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        participants:
+          type: integer
+        imageUrl:
+          type: string
+          nullable: true
+      required:
+        - name
+        - startDate
+        - endDate
+        - participants
+    TripUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        participants:
+          type: integer
+        imageUrl:
+          type: string
+          nullable: true
+    Destination:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+          format: date-time
+        activities:
+          type: array
+          items:
+            type: string
+        tripId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - startDate
+        - endDate
+        - tripId
+        - createdAt
+        - updatedAt
+    DestinationInput:
+      type: object
+      properties:
+        name:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+          format: date-time
+        activities:
+          type: array
+          items:
+            type: string
+        tripId:
+          type: string
+      required:
+        - name
+        - startDate
+        - endDate
+        - tripId
+    DestinationUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+          format: date-time
+        activities:
+          type: array
+          items:
+            type: string
+        tripId:
+          type: string
