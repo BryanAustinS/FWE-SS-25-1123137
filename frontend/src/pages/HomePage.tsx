@@ -28,11 +28,13 @@ const HomePage = () => {
     
 
     return (
-        <>
-        {trips.map(trip => (
-            <TripCard key={trip.id} trip={trip} onClick={onClickTrip} />
-        ))}
-        </>
+        <div className="grid grid-cols-3">
+            <div className="p-3 gap-6">
+                {trips.map(trip => (
+                    <TripCard key={trip.id} trip={trip} onClick={onClickTrip} />
+                ))}
+            </div>
+        </div>
     )
 }
 

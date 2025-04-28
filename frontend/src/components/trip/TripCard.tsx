@@ -6,9 +6,7 @@ import {
   CardTitle, 
   CardDescription, 
   CardContent, 
-  CardFooter 
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 
 interface TripCardProps {
   trip: Trip;
@@ -19,23 +17,17 @@ export const TripCard: React.FC<TripCardProps> = ({trip, onClick}) => {
   const { name, description, imageUrl, startDate, endDate } = trip;
 
   return (
-      <Card className="w-[350px] h-full gap-10 bg-white shadow-md hover:shadow-2xl transition-shadow overflow-hidden">
-        {imageUrl && (
-          <div className="px-6 pt-6 pb-2"> 
-            <img 
-              className="w-full h-auto aspect-[3/2] rounded-lg object-cover" 
-              src={imageUrl} 
-              alt={name} 
-            />
-          </div>
-        )}
+    <Card className="p-2 "> 
       <CardHeader>
-      <CardTitle 
-      >{name}</CardTitle>
-        <CardDescription>{startDate.toLocaleDateString()} - {endDate.toLocaleDateString()}</CardDescription>
+        <div>
+          <CardTitle>{name}</CardTitle>
+          <CardDescription>{startDate.toLocaleDateString()} - {endDate.toLocaleDateString()}</CardDescription>
+        </div>
       </CardHeader>
-
-      <CardContent>{description}</CardContent>
+      
+      <CardContent>
+        <p>{description}</p>
+      </CardContent>
     </Card>
   )
 }
