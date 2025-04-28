@@ -16,6 +16,7 @@
     "@mantine/form": "^7.17.5",
     "@mantine/hooks": "^7.17.5",
     "@radix-ui/react-slot": "^1.2.0",
+    "@tabler/icons-react": "^3.31.0",
     "@tailwindcss/vite": "^4.1.4",
     "dayjs": "^1.11.13",
     "lucide-react": "^0.503.0",

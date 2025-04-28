@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TripService, Trip } from '../service'
 import { TripCard } from '../components/trip/TripCard'
+import { Grid, Container } from '@mantine/core'
 
 
 const HomePage = () => {
@@ -28,13 +29,15 @@ const HomePage = () => {
     
 
     return (
-        <div className="grid grid-cols-3">
-            <div className="p-3 gap-6">
+        <Container size="xl" py="xl">
+            <Grid gutter="xl">
                 {trips.map(trip => (
-                    <TripCard key={trip.id} trip={trip} onClick={onClickTrip} />
+                    <Grid.Col key={trip.id} span={4}>
+                        <TripCard trip={trip} onClick={onClickTrip} />
+                    </Grid.Col>
                 ))}
-            </div>
-        </div>
+            </Grid>
+        </Container>
     )
 }
 
