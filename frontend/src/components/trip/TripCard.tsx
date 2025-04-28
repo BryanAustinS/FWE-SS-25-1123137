@@ -47,7 +47,7 @@ export const TripCard: React.FC<TripCardProps> = ({trip, onClick}) => {
 
       <Text size="24px" fw={700} mt="md" mb="sm">{name}</Text>
 
-      <Text size="12px" c="gray" fw={700} mb="xs" >{formatDate(startDate)} - {formatDate(endDate)}</Text>
+      <Text size="12px" c="dimmed" fw={700} mb="xs" >{formatDate(startDate)} - {formatDate(endDate)}</Text>
 
       <Text size="14px" fw={500}>{description}</Text>
 
