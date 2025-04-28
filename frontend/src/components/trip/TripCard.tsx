@@ -16,10 +16,9 @@ interface TripCardProps {
 }
 
 export const TripCard: React.FC<TripCardProps> = ({trip, onClick}) => {
-  const { name, description, imageUrl } = trip;
+  const { name, description, imageUrl, startDate, endDate } = trip;
 
   return (
-    <div className="mb-8"> 
       <Card className="w-[350px] h-full gap-10 bg-white shadow-md hover:shadow-2xl transition-shadow overflow-hidden">
         {imageUrl && (
           <div className="px-6 pt-6 pb-2"> 
@@ -31,14 +30,12 @@ export const TripCard: React.FC<TripCardProps> = ({trip, onClick}) => {
           </div>
         )}
       <CardHeader>
-        <CardTitle className="text-xl font-bold mb-3">{name}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+      <CardTitle 
+      >{name}</CardTitle>
+        <CardDescription>{startDate.toLocaleDateString()} - {endDate.toLocaleDateString()}</CardDescription>
       </CardHeader>
 
-      <CardContent></CardContent>
-
-      <CardFooter></CardFooter>
+      <CardContent>{description}</CardContent>
     </Card>
-  </div>
   )
 }
