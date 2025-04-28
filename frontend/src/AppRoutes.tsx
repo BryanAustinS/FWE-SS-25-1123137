@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes, RouteProps } from 'react-router-dom'
 import  HomePage  from './pages/HomePage.tsx';
-
+import { Navbar } from './components/navbar/Navbar.tsx'
+import { Box } from '@mantine/core'
 export type RouteConfig = RouteProps & {
     path: string;
     isPrivate?: boolean
@@ -23,5 +24,12 @@ export const AppRoutes = () => {
         <Route key={route.path} {...route} />
     );
 
-    return <Routes>{routes.map(renderRouteMap)}</Routes>
+    return(
+        <>
+            <Navbar />
+            <Box py="md" px="md">
+                <Routes>{routes.map(renderRouteMap)}</Routes>
+            </Box>
+        </>
+    ) 
 }
