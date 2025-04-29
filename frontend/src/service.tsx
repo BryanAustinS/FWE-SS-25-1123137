@@ -5,6 +5,8 @@ const configuration = new Configuration({
     basePath: 'http://localhost:3000',
 });
 
+const API_BASE_URL = 'http://localhost:3000';
+
 const apiClient = new DefaultApi(configuration);
 
 export const TripService = {
@@ -19,7 +21,21 @@ export const TripService = {
 
     getTripById: async (id: string): Promise<Trip> => {
         try {
-            return await apiClient.getTripById({id});
+            const response = await fetch(`${API_BASE_URL}/api/trip/${id}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            if (Array.isArray(data)) {
+                if (data.length === 0) {
+                    throw new Error('Trip not found');
+                }
+                return data[0];
+            }
+            
+            return data;
         } catch (error) {
             console.error('Error fetching trip by ID: ', error);
             throw error;

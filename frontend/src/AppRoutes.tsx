@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes, RouteProps, useNavigate } from 'react-router-dom'
 import  HomePage  from './pages/HomePage.tsx';
+import TripDetailsPage from './pages/TripDetailsPage.tsx';
 import { Navbar } from './components/navbar/Navbar.tsx'
 import { Box } from '@mantine/core'
 
@@ -18,6 +19,10 @@ export const routes: RouteConfig[] = [
     {
         path: '/home',
         element: <HomePage />
+    },
+    {
+        path: `/trip/:id`,
+        element: <TripDetailsPage/>
     }
 ]
 export const AppRoutes = () => {
