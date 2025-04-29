@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { TripService, Trip } from '../service'
 import { TripCard } from '../components/trip/TripCard'
 import { Grid, Container } from '@mantine/core'
+import { EmptyCard } from '@/components/trip/EmptyCard';
 
 
 const HomePage = () => {
@@ -26,18 +27,19 @@ const HomePage = () => {
         navigate(`/trip/${id}`);
     }
 
-    
-
     return (
-        <Container size="xl" py="xl">
-            <Grid gutter="xl">
-                {trips.map(trip => (
-                    <Grid.Col key={trip.id} span={4}>
-                        <TripCard trip={trip} onClick={onClickTrip} />
-                    </Grid.Col>
-                ))}
-            </Grid>
-        </Container>
+        <>
+            {trips.length === 0 && <EmptyCard msg="Looks like you don't have any trip..." buttonMsg="Create your first trip" />}
+            <Container size="xl">
+                <Grid gutter="xl">
+                    {trips.map(trip => (
+                        <Grid.Col key={trip.id} span={4}>
+                            <TripCard trip={trip} onClick={onClickTrip} />
+                        </Grid.Col>
+                    ))}
+                </Grid>
+            </Container>
+        </>
     )
 }
 

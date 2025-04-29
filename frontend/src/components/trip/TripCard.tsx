@@ -15,43 +15,30 @@ export const TripCard: React.FC<TripCardProps> = ({trip, onClick}) => {
   return (
 
     <Card shadow="sm" padding="lg" radius="md" withBorder> 
-      <Card.Section px="lg">
-        <Flex justify="flex-end">
-          <Menu withinPortal position="bottom-end" shadow="sm">
-            <Menu.Target>
-              <ActionIcon variant="subtle" color="gray">
-                <IconDots size={12} />
-              </ActionIcon>
-            </Menu.Target>
-
-            <Menu.Dropdown>
-              <Menu.Item leftSection={<IconPencil size={10}/>}>
-                Edit Trip
-              </Menu.Item>
-              <Menu.Item leftSection={<IconTrash size={10} color="red"/>}>
-                Delete Trip
-              </Menu.Item>
-            </Menu.Dropdown>
-          </Menu>
-        </Flex>
-
-
+      <Card.Section p="md">
         <Image
           src={imageUrl}
           h={200}
           fit="cover"
           radius="md"
         />
-
       </Card.Section>
-
-      <Text size="24px" fw={700} mt="md" mb="sm">{name}</Text>
-
+    
+      <Text size="24px" fw={700} mb="sm">{name}</Text>
       <Text size="12px" c="dimmed" fw={700} mb="xs" >{formatDate(startDate)} - {formatDate(endDate)}</Text>
+      <Text size="14px" fw={300}>{description}</Text>
 
-      <Text size="14px" fw={500}>{description}</Text>
-
-      
+      <Group mt="xs">
+        <Button radius="md" style={{ flex: 1 }} onClick={() => onClick?.(trip.id)}>
+          Show details
+        </Button>
+        <ActionIcon variant="light" radius="md" size={36}>
+          <IconPencil size={20}/>
+        </ActionIcon>
+        <ActionIcon variant="light" radius="md" size={36}>
+          <IconTrash size={20}/>
+        </ActionIcon>
+      </Group>
     </Card>
   )
 }
