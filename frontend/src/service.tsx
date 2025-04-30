@@ -112,6 +112,15 @@ export const DestinationService = {
         }
     },
 
+    getDestinationByTripId: async (tripId: string) : Promise<Destination[]> => {
+        try {
+            return await apiClient.getDestinationByTripId({tripId});
+        } catch (error) {
+            console.error('Error fetching destinations by name: ', error);
+            throw error;
+        }
+    },
+
     getDestinationByName: async (name: string): Promise<Destination[]> => {
         try {
             return await apiClient.getDestinationByName({name});

@@ -135,6 +135,16 @@ export class Routes {
     );
 
     this.router.get(
+      '/destination/trip/:tripid',
+      (req, res) => {
+        this.destinationController.getTripId(
+          req,
+          res
+        );
+      }
+    );
+
+    this.router.get(
       '/destination/:id',
       (req, res) => {
         this.destinationController.getId(

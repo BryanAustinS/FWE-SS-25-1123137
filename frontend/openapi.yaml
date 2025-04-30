@@ -199,6 +199,31 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Destination'
+  /api/destination/trip/{tripId}:
+    get:
+      summary: Get destinations by trip ID
+      description: Returns all destinations associated with a specific trip ID
+      operationId: getDestinationByTripId
+      parameters:
+        - name: tripId
+          in: path
+          description: The ID of the trip to fetch destinations for
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Destination'
+        '404':
+          description: Trip not found
+        '500':
+          description: Internal server error
   /api/destination/{id}:
     get:
       summary: Get a destination by ID
@@ -342,11 +367,9 @@ components:
           type: string
         name:
           type: string
-        startDate:
-          type: string
-        endDate:
-          type: string
-          format: date-time
+        nights:
+          type: integer
+          default: 0
         activities:
           type: array
           items:
@@ -362,21 +385,18 @@ components:
       required:
         - id
         - name
-        - startDate
-        - endDate
         - tripId
         - createdAt
         - updatedAt
+
     DestinationInput:
       type: object
       properties:
         name:
           type: string
-        startDate:
-          type: string
-        endDate:
-          type: string
-          format: date-time
+        nights:
+          type: integer
+          default: 0
         activities:
           type: array
           items:
@@ -385,19 +405,15 @@ components:
           type: string
       required:
         - name
-        - startDate
-        - endDate
         - tripId
+
     DestinationUpdate:
       type: object
       properties:
         name:
           type: string
-        startDate:
-          type: string
-        endDate:
-          type: string
-          format: date-time
+        nights:
+          type: integer
         activities:
           type: array
           items:

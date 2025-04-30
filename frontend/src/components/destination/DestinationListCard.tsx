@@ -1,28 +1,37 @@
 import { useListState } from '@mantine/hooks'
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd'
-import { Table, ActionIcon } from '@mantine/core'
+import { Table, ActionIcon, Container } from '@mantine/core'
 import { IconGripVertical, IconPencil } from '@tabler/icons-react'
+import { Destination } from '@/service'
 
-// get data from api
-const data = [
-    {id: "123", destination: "Germany", nights: 2, activities: ["beer tour", "frankfurt tour"]}
-]
+interface DestinationListCardProps {
+    destinations: Destination[];
+}
 
-export function DestinationListCard() {
-    const [state, handlers] = useListState(data);
+export const DestinationListCard: React.FC<DestinationListCardProps> = ({ destinations }) => {
+    const [state, handlers] = useListState(destinations);
 
     const items = state.map((item, index) => (
         <Draggable key={item.id} index={index} draggableId={item.id}>
             {(provided) => (
                 <Table.Tr ref={provided.innerRef} {...provided.draggableProps}>
                     <Table.Td>
-                        <div {...provided.dragHandleProps}>
+                        <div {...provided.dragHandleProps}
+                        style={{
+                            width: '40px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            height: '100%',
+                            color: 'var(--mantine-color-gray-6)',
+                        }}
+                        >
                             <IconGripVertical size={18} stroke={1.5} />
                         </div>
                     </Table.Td>
-                    <Table.Td w={120}>{item.destination}</Table.Td>
+                    <Table.Td w={80}>{item.name}</Table.Td>
                     <Table.Td w={80}>{item.nights}</Table.Td>
-                    <Table.Td w={200}>{item.activities}</Table.Td>
+                    <Table.Td w={80}>{item.activities}</Table.Td>
                     <Table.Td w={30}>
                         <ActionIcon radius="xl" size={36}>
                             <IconPencil size={20}/>
@@ -34,7 +43,8 @@ export function DestinationListCard() {
     ));
     
     return (
-      <Table.ScrollContainer minWidth={420}>
+    <Container my="xl">
+      <Table.ScrollContainer  minWidth={420}>
         <DragDropContext
             onDragEnd={({destination, source}) =>
                 handlers.reorder({from: source.index, to: destination?.index || 0})
@@ -44,10 +54,9 @@ export function DestinationListCard() {
                 <Table.Thead>
                     <Table.Tr>
                         <Table.Th w={40} />
-                        <Table.Th w={120}>Destination</Table.Th>
+                        <Table.Th w={80}>Destinations</Table.Th>
                         <Table.Th w={80}>Nights</Table.Th>
-                        <Table.Th w={200}>Activities</Table.Th>
-                        <Table.Th w={30}></Table.Th>
+                        <Table.Th w={80}>Activities</Table.Th>
                     </Table.Tr>
                 </Table.Thead>
                 <Droppable droppableId="dnd-list" direction="vertical">
@@ -60,6 +69,7 @@ export function DestinationListCard() {
                 </Droppable>
             </Table>
         </DragDropContext>
-      </Table.ScrollContainer>  
+      </Table.ScrollContainer>
+      </Container>  
     );
 }

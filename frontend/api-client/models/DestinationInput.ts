@@ -27,16 +27,10 @@ export interface DestinationInput {
     name: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof DestinationInput
      */
-    startDate: string;
-    /**
-     * 
-     * @type {Date}
-     * @memberof DestinationInput
-     */
-    endDate: Date;
+    nights?: number;
     /**
      * 
      * @type {Array<string>}
@@ -56,8 +50,6 @@ export interface DestinationInput {
  */
 export function instanceOfDestinationInput(value: object): value is DestinationInput {
     if (!('name' in value) || value['name'] === undefined) return false;
-    if (!('startDate' in value) || value['startDate'] === undefined) return false;
-    if (!('endDate' in value) || value['endDate'] === undefined) return false;
     if (!('tripId' in value) || value['tripId'] === undefined) return false;
     return true;
 }
@@ -73,8 +65,7 @@ export function DestinationInputFromJSONTyped(json: any, ignoreDiscriminator: bo
     return {
         
         'name': json['name'],
-        'startDate': json['startDate'],
-        'endDate': (new Date(json['endDate'])),
+        'nights': json['nights'] == null ? undefined : json['nights'],
         'activities': json['activities'] == null ? undefined : json['activities'],
         'tripId': json['tripId'],
     };
@@ -92,8 +83,7 @@ export function DestinationInputToJSONTyped(value?: DestinationInput | null, ign
     return {
         
         'name': value['name'],
-        'startDate': value['startDate'],
-        'endDate': ((value['endDate']).toISOString()),
+        'nights': value['nights'],
         'activities': value['activities'],
         'tripId': value['tripId'],
     };

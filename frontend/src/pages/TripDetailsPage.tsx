@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Trip, TripService } from '@/service';
+import { Trip, TripService, Destination, DestinationService } from '@/service';
 import { Image, Container, Paper, Title, Text, Flex, Group, Divider, Button, ActionIcon} from '@mantine/core'; 
 import { EmptyCard } from '@/components/trip/EmptyCard';
 import { formatDate, calculateNights } from '@/utils/utils'
 import { IconUser, IconCalendar, IconPencil, IconMoon } from '@tabler/icons-react'
+import { DestinationListCard } from '@/components/destination/DestinationListCard';
 
 const TripDetailsPage = () => { 
     const { id } = useParams<{ id: string }>();
     const [trip, setTrip] = useState<Trip>();
+    const [destinations, setDestinations] = useState<Destination[]>();
 
     useEffect(() => {
         if (!id) return;
@@ -25,8 +27,22 @@ const TripDetailsPage = () => {
         fetchTrip();
     }, [id]);
 
-    let totalNights = trip?.startDate && trip?.endDate ? calculateNights(trip.startDate, trip.endDate) : 0; 
+    useEffect(() => {
+        if (!id) return;
 
+        const fetchDestinations = async() => {
+            try {
+                const destinations = await DestinationService.getDestinationByTripId(id);
+                setDestinations(destinations);
+            } catch (error){
+                console.error('Error fetching the Destinations: ', error);
+            }
+        };
+
+        fetchDestinations();
+    }, []);
+
+    let totalNights = trip?.startDate && trip?.endDate ? calculateNights(trip.startDate, trip.endDate) : 0; 
 
     return (
         <div>
@@ -84,6 +100,8 @@ const TripDetailsPage = () => {
                                 </Text>
                             </Group>
                         </Flex>
+
+                        <DestinationListCard destinations={destinations || []}></DestinationListCard>
                     </Paper>
                 </Container>
             )}

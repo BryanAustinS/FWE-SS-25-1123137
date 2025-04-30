@@ -27,16 +27,10 @@ export interface DestinationUpdate {
     name?: string;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof DestinationUpdate
      */
-    startDate?: string;
-    /**
-     * 
-     * @type {Date}
-     * @memberof DestinationUpdate
-     */
-    endDate?: Date;
+    nights?: number;
     /**
      * 
      * @type {Array<string>}
@@ -69,8 +63,7 @@ export function DestinationUpdateFromJSONTyped(json: any, ignoreDiscriminator: b
     return {
         
         'name': json['name'] == null ? undefined : json['name'],
-        'startDate': json['startDate'] == null ? undefined : json['startDate'],
-        'endDate': json['endDate'] == null ? undefined : (new Date(json['endDate'])),
+        'nights': json['nights'] == null ? undefined : json['nights'],
         'activities': json['activities'] == null ? undefined : json['activities'],
         'tripId': json['tripId'] == null ? undefined : json['tripId'],
     };
@@ -88,8 +81,7 @@ export function DestinationUpdateToJSONTyped(value?: DestinationUpdate | null, i
     return {
         
         'name': value['name'],
-        'startDate': value['startDate'],
-        'endDate': value['endDate'] == null ? undefined : ((value['endDate']).toISOString()),
+        'nights': value['nights'],
         'activities': value['activities'],
         'tripId': value['tripId'],
     };

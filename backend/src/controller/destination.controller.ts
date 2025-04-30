@@ -87,6 +87,33 @@ export class DestinationController {
     }
   };
 
+  getTripId = async (
+    req: Request,
+    res: Response
+  ) => {
+    try {
+      const tripId = req.params.tripid;
+
+      const result =
+        await this.destinationRepository.getDestinationByTripId(
+          tripId
+        );
+      return res
+        .status(200)
+        .json(result);
+    } catch (error: any) {
+      console.error(
+        'Error in fetching destination by trip id: ',
+        error
+      );
+      return res.status(500).json({
+        error:
+          'Failed to fetch destination by trip id',
+        details: error.message,
+      });
+    }
+  };
+
   getName = async (
     req: Request,
     res: Response
