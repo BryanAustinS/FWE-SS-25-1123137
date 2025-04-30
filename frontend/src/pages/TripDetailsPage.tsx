@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { Trip, TripService } from '@/service';
 import { Image, Container, Paper, Title, Text, Flex, Group, Divider, Button, ActionIcon} from '@mantine/core'; 
 import { EmptyCard } from '@/components/trip/EmptyCard';
-import { formatDate } from '@/utils/utils'
-import { IconUserFilled, IconCalendar, IconPencil} from '@tabler/icons-react'
+import { formatDate, calculateNights } from '@/utils/utils'
+import { IconUser, IconCalendar, IconPencil, IconMoon } from '@tabler/icons-react'
 
 const TripDetailsPage = () => { 
     const { id } = useParams<{ id: string }>();
@@ -25,6 +25,8 @@ const TripDetailsPage = () => {
         fetchTrip();
     }, [id]);
 
+    let totalNights = trip?.startDate && trip?.endDate ? calculateNights(trip.startDate, trip.endDate) : 0; 
+
 
     return (
         <div>
@@ -32,7 +34,7 @@ const TripDetailsPage = () => {
 
             {trip && (
                 <Container size="md" py="sm">
-                    <Paper shadow="sm" p="md" withBorder>
+                    <Paper shadow="sm" p="md" radius="md" withBorder>
                         <Image
                             src={trip.imageUrl}
                             width="100%"
@@ -44,8 +46,8 @@ const TripDetailsPage = () => {
                         <Flex justify="space-between" align="center">
                             <Title pt="lg" pb="sm" fw={1000}>{trip.name}</Title>
                             <Group pt="lg">
-                                <Button>Add a destination</Button>
-                                <ActionIcon size={36}>
+                                <Button radius="md">Add a destination</Button>
+                                <ActionIcon size={36} radius="md">
                                     <IconPencil size={20} />
                                 </ActionIcon>
                             </Group>
@@ -54,7 +56,7 @@ const TripDetailsPage = () => {
                         <Flex 
                             direction={{base: 'column', sm: 'row'}} 
                             align={{base: 'flex-start', sm: 'center'}}
-                            gap="md" 
+                            gap="sm" 
                             >
                             <Group  align="center">
                                 <IconCalendar size={16} color="gray" />
@@ -64,9 +66,19 @@ const TripDetailsPage = () => {
                             </Group>
                             
                             <Divider orientation="vertical" display={{base: 'none', sm: 'block'}} />
+
+                            <Group align="center">
+                                <IconMoon size={16} color="gray"/>
+                                <Text size="sm" c="dimmed">
+                                    {totalNights || 0} {totalNights <= 1 ? 'night' : 'nights'}
+                                </Text>
+                            </Group>
+
+
+                            <Divider orientation="vertical" display={{base: 'none', sm: 'block'}} />
                             
                             <Group  align="center">
-                                <IconUserFilled size={16} color="gray" />
+                                <IconUser size={16} color="gray" />
                                 <Text size="sm" c="dimmed">
                                 {trip.participants || 0} {trip.participants === 1 ? 'Participant' : 'Participants'}
                                 </Text>

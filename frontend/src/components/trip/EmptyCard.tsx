@@ -1,4 +1,4 @@
-import { Button, Container, SimpleGrid, Title, Center, Stack, Box } from '@mantine/core';
+import { Button, Container, Title, Center, Box } from '@mantine/core';
 
 interface EmptyCardProps {
   msg: string;

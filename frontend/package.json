@@ -11,6 +11,7 @@
     "generate-api": "openapi-generator-cli generate"
   },
   "dependencies": {
+    "@hello-pangea/dnd": "^18.0.1",
     "@mantine/core": "^7.17.5",
     "@mantine/dates": "^7.17.5",
     "@mantine/form": "^7.17.5",

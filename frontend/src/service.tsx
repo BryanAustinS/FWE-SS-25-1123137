@@ -1,5 +1,5 @@
 import { Configuration, DefaultApi } from '../api-client';
-import { Trip, TripInput, TripUpdate } from '../api-client/models';
+import { Trip, TripInput, TripUpdate, Destination, DestinationInput, DestinationUpdate } from '../api-client/models';
 
 const configuration = new Configuration({
     basePath: 'http://localhost:3000',
@@ -79,7 +79,78 @@ export const TripService = {
     }
 }
 
+export const DestinationService = {
+    getAllDestinations: async (): Promise<Destination[]> => {
+        try {
+            return await apiClient.getAllDestinations();
+        } catch (error) {
+            console.error('Error fetching all trips: ', error);
+            throw error;
+        }
+    },
+
+    getDestinationById: async (id: string): Promise<Destination> => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/destination/${id}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            if (Array.isArray(data)) {
+                if (data.length === 0) {
+                    throw new Error('Destination not found');
+                }
+                return data[0];
+            }
+            
+            return data;
+        } catch (error) {
+            console.error('Error fetching destination by ID: ', error);
+            throw error;
+        }
+    },
+
+    getDestinationByName: async (name: string): Promise<Destination[]> => {
+        try {
+            return await apiClient.getDestinationByName({name});
+        } catch (error) {
+            console.error('Error fetching destinations by name: ', error);
+            throw error;
+        }
+    },
+
+    createDestination: async (destinationData: DestinationInput): Promise<Destination> => {
+        try {
+            return await apiClient.createDestination({ destinationInput: destinationData });
+        } catch (error) {
+            console.error('Error creating Destination: ', error);
+            throw error;       
+        }
+    },
+
+    updateDestination: async (id: string, destinationData: DestinationUpdate): Promise<Destination> => {
+        try {
+            return await apiClient.updateDestination({ id, destinationUpdate: destinationData });
+        } catch (error) {
+            console.error('Error updating Destination: ', error);
+            throw error;         
+        }
+    },
+
+    deleteDestination: async (id: string): Promise<Destination> => {
+        try {
+            return await apiClient.deleteDestination({id});
+        } catch (error) {
+            console.error('Error updating Destination: ', error);
+            throw error;         
+        }
+    }
+}
+
 export type { Trip, TripInput, TripUpdate };
+export type { Destination, DestinationInput, DestinationUpdate }
 
 
 

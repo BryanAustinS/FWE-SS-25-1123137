@@ -6,4 +6,12 @@ const formatDate = (date: string | Date) => {
     }).format(new Date(date));
   };
 
-export { formatDate }
+  const calculateNights = (startDate: Date, endDate: Date | number) => {
+    const start = new Date(startDate).getTime();
+    const end = new Date(endDate).getTime();
+    const millisecondsPerDay = 1000 * 60 * 60 * 24;
+    return Math.ceil((end - start) / millisecondsPerDay);
+  };
+  
+
+export { formatDate, calculateNights }
