@@ -1,7 +1,7 @@
 import React from 'react'
 import { Trip } from '@/service'
-import { Card, Image, Text, Badge, Button, Group, ActionIcon, Menu, Flex } from '@mantine/core';
-import { IconDots, IconTrash, IconPencil } from '@tabler/icons-react'
+import { Card, Image, Text, Button, Group, ActionIcon} from '@mantine/core';
+import { IconTrash, IconPencil } from '@tabler/icons-react'
 import { formatDate } from '@/utils/utils'
 
 interface TripCardProps {

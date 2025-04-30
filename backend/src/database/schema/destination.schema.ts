@@ -1,7 +1,7 @@
 import {
   uuid,
   date,
-  text,
+  integer,
   pgTable,
   varchar,
   jsonb,
@@ -16,8 +16,7 @@ export const destination = pgTable(
     name: varchar({
       length: 256,
     }).notNull(),
-    startDate: text().notNull(),
-    endDate: date().notNull(),
+    nights: integer().default(0),
     activities: jsonb().default('[]'),
     tripId: uuid('trip_id')
       .notNull()
