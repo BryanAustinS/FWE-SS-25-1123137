@@ -1,8 +1,9 @@
 import { IconSearch } from '@tabler/icons-react';
-import { Autocomplete, Text, Group, Button } from '@mantine/core';
+import { TextInput, Text, Group, Button, ActionIcon } from '@mantine/core';
 import classes from './Navbar.module.css';
 import { useState } from 'react'
 import { TripForm } from '@/components/trip/TripForm'
+import { IconArrowRight } from '@tabler/icons-react'
 interface NavbarProps {
   onClick?: () => void
 }
@@ -27,10 +28,15 @@ export function Navbar({ onClick }: NavbarProps) {
         </Group>
 
         <Group>
-          <Autocomplete
+          <TextInput
             className={classes.search}
             placeholder="Search for Trip or Destination"
             leftSection={<IconSearch size={16} stroke={1.5} />}
+            rightSection={
+              <ActionIcon size={24} radius="md" variant="filled">
+                <IconArrowRight size={18} stroke={1.5} />
+              </ActionIcon>
+            }
             visibleFrom="xs"
             style={{width: '500px'}}
             radius='md'
