@@ -16,6 +16,7 @@
     "@mantine/dates": "^7.17.5",
     "@mantine/form": "^7.17.5",
     "@mantine/hooks": "^7.17.5",
+    "@mantine/modals": "^7.17.5",
     "@radix-ui/react-slot": "^1.2.0",
     "@tabler/icons-react": "^3.31.0",
     "@tailwindcss/vite": "^4.1.4",

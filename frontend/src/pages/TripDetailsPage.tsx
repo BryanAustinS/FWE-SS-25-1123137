@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Trip, TripService, Destination, DestinationService } from '@/service';
 import { Image, Container, Paper, Title, Text, Flex, Group, Divider, Button, ActionIcon} from '@mantine/core'; 
 import { EmptyCard } from '@/components/trip/EmptyCard';
@@ -12,6 +12,7 @@ const TripDetailsPage = () => {
     const [trip, setTrip] = useState<Trip>();
     const [destinations, setDestinations] = useState<Destination[]>();
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         if (!id) return;
@@ -32,7 +33,7 @@ const TripDetailsPage = () => {
         return () => {
             isMounted = false;
         };
-    }, [id]);
+    }, [id, location.key]);
     
     useEffect(() => {
         if (!id) return;

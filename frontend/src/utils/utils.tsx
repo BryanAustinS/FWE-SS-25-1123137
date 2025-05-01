@@ -12,6 +12,6 @@ const formatDate = (date: string | Date) => {
     const millisecondsPerDay = 1000 * 60 * 60 * 24;
     return Math.ceil((end - start) / millisecondsPerDay);
   };
-  
 
 export { formatDate, calculateNights }
+

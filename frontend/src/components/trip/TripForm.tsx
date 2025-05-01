@@ -51,14 +51,13 @@ export const TripForm: React.FC<TripFormProps> = ({title, trip, onClose}) => {
                     await TripService.updateTrip(trip.id, tripInput);
                     navigate(`/trip/${trip.id}`)
                 } else {
-                    const createdTrip = await TripService.createTrip(tripInput);
-                    if (createdTrip && createdTrip.id){
-                        navigate(`/trip/${createdTrip.id}`);
-                    } 
+                    await TripService.createTrip(tripInput);
+                    navigate('/home')
                 }
                 onClose();
             } catch (error) {
                 console.error("Error saving a trip", error);
+                navigate('/home');
             }
         }
     }

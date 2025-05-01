@@ -1,8 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Trip } from '@/service'
 import { Card, Image, Text, Button, Group, ActionIcon} from '@mantine/core';
 import { IconTrash, IconPencil } from '@tabler/icons-react'
 import { formatDate } from '@/utils/utils'
+import { modals } from '@mantine/modals';
+import { TripService } from '@/service' 
 
 interface TripCardProps {
   trip: Trip;
@@ -11,6 +14,31 @@ interface TripCardProps {
 
 export const TripCard: React.FC<TripCardProps> = ({trip, onClick}) => {
   const { name, description, imageUrl, startDate, endDate } = trip;
+  
+  const navigate = useNavigate();
+
+  const handleDelete = () =>
+    modals.openConfirmModal({
+    title: "Delete Trip",
+    centered: true,
+    children: (
+        <Text size="sm">
+        Are you sure you want to delete your Trip?
+        </Text>
+    ),
+    labels: { confirm: `Delete Trip`, cancel: "Cancel" },
+    confirmProps: { color: 'red' },
+    onCancel: () => console.log('Cancel'),
+    onConfirm: async() => {
+      try {
+        await TripService.deleteTrip(trip.id);
+        navigate('/home');
+        console.log("Trip delete successfully");
+      } catch (error) {
+        console.error('Failed to delete trip ', error)
+      }
+    },
+    });
 
   return (
 
@@ -35,7 +63,7 @@ export const TripCard: React.FC<TripCardProps> = ({trip, onClick}) => {
         <ActionIcon variant="light" radius="md" size={36}>
           <IconPencil size={20}/>
         </ActionIcon>
-        <ActionIcon variant="light" radius="md" size={36}>
+        <ActionIcon variant="light" radius="md" size={36} onClick={handleDelete}>
           <IconTrash size={20}/>
         </ActionIcon>
       </Group>
