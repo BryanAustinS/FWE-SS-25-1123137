@@ -159,6 +159,10 @@ export class TripController {
         });
       }
 
+      if (!tripData.imageUrl && tripData.name){
+        tripData.imageUrl = await this.unsplashService.getTripImage(tripData.name);
+      }
+
       const validatedData = updateTripSchema.parse(tripData);
 
       const result =

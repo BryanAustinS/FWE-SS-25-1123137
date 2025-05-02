@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Trip } from '@/service'
 import { Card, Image, Text, Button, Group, ActionIcon} from '@mantine/core';
-import { IconTrash, IconPencil } from '@tabler/icons-react'
+import { IconTrash } from '@tabler/icons-react'
 import { formatDate } from '@/utils/utils'
 import { modals } from '@mantine/modals';
 import { TripService } from '@/service' 
@@ -60,9 +60,6 @@ export const TripCard: React.FC<TripCardProps> = ({trip, onClick}) => {
         <Button radius="md" style={{ flex: 1 }} onClick={() => onClick?.(trip.id)}>
           Show details
         </Button>
-        <ActionIcon variant="light" radius="md" size={36}>
-          <IconPencil size={20}/>
-        </ActionIcon>
         <ActionIcon variant="light" radius="md" size={36} onClick={handleDelete}>
           <IconTrash size={20}/>
         </ActionIcon>

@@ -4,8 +4,11 @@ import { Trip, TripService, Destination, DestinationService } from '@/service';
 import { Image, Container, Paper, Title, Text, Flex, Group, Divider, Button, ActionIcon} from '@mantine/core'; 
 import { EmptyCard } from '@/components/trip/EmptyCard';
 import { formatDate, calculateNights } from '@/utils/utils'
-import { IconUser, IconCalendar, IconPencil, IconMoon, IconArrowLeft } from '@tabler/icons-react'
+import { IconUser, IconCalendar, IconPencil, IconMoon, IconArrowLeft, IconTrash } from '@tabler/icons-react'
 import { DestinationListCard } from '@/components/destination/DestinationListCard';
+import { modals } from '@mantine/modals';
+import { TripForm } from '@/components/trip/TripForm'
+
 
 const TripDetailsPage = () => { 
     const { id } = useParams<{ id: string }>();
@@ -13,7 +16,38 @@ const TripDetailsPage = () => {
     const [destinations, setDestinations] = useState<Destination[]>();
     const navigate = useNavigate();
     const location = useLocation();
+    const [isFormOpen, setFormOpen] = useState(false);
+    
+    const handleOpenForm = () => {
+        setFormOpen(true);
+    }
 
+    const handleCloseForm = () => {
+        setFormOpen(false);
+    } 
+
+    const handleDelete = () =>
+        modals.openConfirmModal({
+        title: "Delete Trip",
+        centered: true,
+        children: (
+            <Text size="sm">
+            Are you sure you want to delete your Trip?
+            </Text>
+        ),
+        labels: { confirm: `Delete Trip`, cancel: "Cancel" },
+        confirmProps: { color: 'red' },
+        onCancel: () => console.log('Cancel'),
+        onConfirm: async() => {
+        try {
+            await TripService.deleteTrip(id ?? '');
+            navigate('/home');
+            console.log("Trip delete successfully");
+        } catch (error) {
+            console.error('Failed to delete trip ', error)
+        }
+        },
+        });
     useEffect(() => {
         if (!id) return;
     
@@ -84,8 +118,11 @@ const TripDetailsPage = () => {
                                 <Title pt="lg" pb="sm" fw={1000}>{trip.name}</Title>
                                 <Group pt="lg">
                                     <Button radius="md">Add a destination</Button>
-                                    <ActionIcon size={36} radius="md">
+                                    <ActionIcon size={36} radius="md" onClick={handleOpenForm}>
                                         <IconPencil size={20} />
+                                    </ActionIcon>
+                                    <ActionIcon radius="md" size={36} onClick={handleDelete}>
+                                        <IconTrash size={20}/>
                                     </ActionIcon>
                                 </Group>
                             </Flex>
@@ -126,6 +163,14 @@ const TripDetailsPage = () => {
                         </Paper>
                     </Container>
                 </Flex>
+
+                { isFormOpen && (
+                    <TripForm 
+                        title="Update your Trip"
+                        trip={trip}
+                        onClose={handleCloseForm}
+                    />
+                )}
 
                 </>
             )}

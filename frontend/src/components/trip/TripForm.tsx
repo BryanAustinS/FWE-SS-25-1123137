@@ -14,19 +14,21 @@ interface TripFormProps {
 export const TripForm: React.FC<TripFormProps> = ({title, trip, onClose}) => {
     const navigate = useNavigate();
 
-    const form = useForm({
+    let form = useForm({
         initialValues: {
-            name: '',
-            dateRange: [new Date(), new Date()],
-            participants: 0,
-            description: ''
+            name: trip ? trip.name : '',
+            dateRange: trip ? [new Date(trip.startDate), new Date(trip.endDate)] : [new Date(), new Date()],
+            participants: trip ? trip.participants : 0,
+            description: trip ? trip.description : ''
         },
         validate: {
             name: (value) => (value.trim().length === 0 ? 'Trip name is required' : null),
             dateRange: (value) => (value[0] === null || value[1] === null ? 'Date is required' : null),
             participants: (value) => (value < 1 ? 'Participants should be more than 0' : null)
         }
-    })
+    })  
+    
+
 
     useEffect(() => {
         document.body.style.overflow = "hidden";
@@ -38,10 +40,27 @@ export const TripForm: React.FC<TripFormProps> = ({title, trip, onClose}) => {
 
     const handleSaveClick = async () => {
         if (!form.validate().hasErrors) {
+            const startDate = form.values.dateRange[0];
+            const endDate = form.values.dateRange[1];
+            
+            const adjustedStartDate = new Date(
+                startDate.getFullYear(),
+                startDate.getMonth(),
+                startDate.getDate(),
+                12, 0, 0
+            );
+            
+            const adjustedEndDate = new Date(
+                endDate.getFullYear(),
+                endDate.getMonth(), 
+                endDate.getDate(),
+                12, 0, 0
+            );
+            
             const tripInput: TripInput = {
                 name: form.values.name,
-                startDate: form.values.dateRange[0],
-                endDate: form.values.dateRange[1],
+                startDate: adjustedStartDate,
+                endDate: adjustedEndDate,
                 participants: form.values.participants,
                 description: form.values.description,
             };
@@ -62,7 +81,7 @@ export const TripForm: React.FC<TripFormProps> = ({title, trip, onClose}) => {
         }
     }
 
-    return (
+    return (        
         <Overlay blur={2} center>
             <Paper shadow="sm" py="md" px="xl" radius="md" w={"500px"} withBorder>
                 <h2>{title}</h2>

@@ -33,7 +33,7 @@ export function Navbar({ onClick }: NavbarProps) {
             placeholder="Search for Trip or Destination"
             leftSection={<IconSearch size={16} stroke={1.5} />}
             rightSection={
-              <ActionIcon size={24} radius="md" variant="filled">
+              <ActionIcon size={24} radius="md" variant="outline">
                 <IconArrowRight size={18} stroke={1.5} />
               </ActionIcon>
             }
