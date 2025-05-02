@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Trip, TripService, Destination, DestinationService } from '@/service';
-import { Image, Container, Paper, Title, Text, Flex, Group, Divider, Button, ActionIcon} from '@mantine/core'; 
+import { Image, Container, Paper, Title, Text, Flex, Group, Divider, Button, ActionIcon, Center, Loader} from '@mantine/core'; 
 import { EmptyCard } from '@/components/trip/EmptyCard';
 import { formatDate, calculateNights } from '@/utils/utils'
 import { IconUser, IconCalendar, IconPencil, IconMoon, IconArrowLeft, IconTrash } from '@tabler/icons-react'
@@ -15,8 +15,8 @@ const TripDetailsPage = () => {
     const [trip, setTrip] = useState<Trip>();
     const [destinations, setDestinations] = useState<Destination[]>();
     const navigate = useNavigate();
-    const location = useLocation();
     const [isFormOpen, setFormOpen] = useState(false);
+    const [isLoading, setLoading] = useState(false);
     
     const handleOpenForm = () => {
         setFormOpen(true);
@@ -48,49 +48,53 @@ const TripDetailsPage = () => {
         }
         },
         });
-    useEffect(() => {
-        if (!id) return;
-    
-        let isMounted = true;
-    
-        const fetchTrip = async () => {
-            try {
-                const trip = await TripService.getTripById(id);
-                if (isMounted) setTrip(trip); 
-            } catch (error) {
-                console.error('Error fetching the Trip:', error);
-            }
-        };
-    
-        fetchTrip();
-    
-        return () => {
-            isMounted = false;
-        };
-    }, [id, location.key]);
-    
-    useEffect(() => {
-        if (!id) return;
-    
-        let isMounted = true;
-    
-        const fetchDestinations = async () => {
-            try {
-                const destinations = await DestinationService.getDestinationByTripId(id);
-                if (isMounted) setDestinations(destinations); 
-            } catch (error) {
-                console.error('Error fetching the Destinations:', error);
-            }
-        };
-    
-        fetchDestinations();
-    
-        return () => {
-            isMounted = false; 
-        };
-    }, [id]);
+
+        useEffect(() => {
+            if (!id) return;
+        
+            let isMounted = true;
+            setLoading(true);
+            
+            const fetchData = async () => {
+                try {
+                    const [tripData, destinationsData] = await Promise.all([
+                        TripService.getTripById(id),
+                        DestinationService.getDestinationByTripId(id)
+                    ]);
+                    
+                    if (isMounted) {
+                        setTrip(tripData);
+                        setDestinations(destinationsData);
+                        setLoading(false);
+                    } 
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                    if (isMounted) {
+                        setTrip(undefined);
+                        setLoading(false);
+                    }
+                }
+            };
+        
+            fetchData();
+        
+            return () => {
+                isMounted = false;
+            };
+        }, [id]);
 
     let totalNights = trip?.startDate && trip?.endDate ? calculateNights(trip.startDate, trip.endDate) : 0; 
+    
+    if (isLoading) {
+        return (
+            <Center style={{ height: '100vh' }}>
+                <Flex direction="column" align="center" gap="md">
+                    <Loader size="lg" />
+                    <Text>Loading trip details...</Text>
+                </Flex>
+            </Center>
+        );
+    }
 
     return (
         <div>
