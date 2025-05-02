@@ -4,6 +4,10 @@ import { useForm } from '@mantine/form'
 import { DatePickerInput } from '@mantine/dates'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { IconCalendar } from '@tabler/icons-react'
+
+import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
 
 interface TripFormProps {
     title: string;
@@ -98,9 +102,23 @@ export const TripForm: React.FC<TripFormProps> = ({title, trip, onClose}) => {
                         <DatePickerInput
                             required
                             clearable
+                            minDate={new Date()}
                             label="Pick date range"
                             placeholder="Enter the date range"
+                            leftSection={<IconCalendar size={20} stroke={1.5} />}
                             type= "range"
+                            getDayProps={(date) => {
+                                const today = new Date();
+                                today.setHours(0, 0, 0, 0);
+
+                                if (date <= today) {
+                                    return {
+                                        opacity: 0.4,
+                                        style: { cursor: 'not-allowed', pointerEvents: 'none' }
+                                    };
+                                }
+                                return {};
+                            }}
                             {...form.getInputProps('dateRange')}
                         />
 
