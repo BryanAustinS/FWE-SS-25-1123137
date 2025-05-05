@@ -14,6 +14,7 @@ const TripDetailsPage = () => {
     const { id } = useParams<{ id: string }>();
     const [trip, setTrip] = useState<Trip>();
     const [destinations, setDestinations] = useState<Destination[]>();
+    const location = useLocation();
     const navigate = useNavigate();
     const [isFormOpen, setFormOpen] = useState(false);
     const [isLoading, setLoading] = useState(false);
@@ -81,7 +82,7 @@ const TripDetailsPage = () => {
             return () => {
                 isMounted = false;
             };
-        }, [id]);
+        }, [id, location.key]);
 
     let totalNights = trip?.startDate && trip?.endDate ? calculateNights(trip.startDate, trip.endDate) : 0; 
     
