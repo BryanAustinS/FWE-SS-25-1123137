@@ -35,10 +35,19 @@ export const TripForm: React.FC<TripFormProps> = ({title, trip, onClose}) => {
 
 
     useEffect(() => {
+        const scrollPosition = window.scrollY;
+        
         document.body.style.overflow = "hidden";
+        document.body.style.position = "fixed";
+        document.body.style.top = `-${scrollPosition}px`;
+        document.body.style.width = "100%";
 
         return () => {
             document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            window.scrollTo(0, scrollPosition);
         };
     }, []);
 
@@ -86,7 +95,7 @@ export const TripForm: React.FC<TripFormProps> = ({title, trip, onClose}) => {
     }
 
     return (        
-        <Overlay blur={2} center>
+        <Overlay blur={2} fixed zIndex={1000} center>
             <Paper shadow="sm" py="md" px="xl" radius="md" w={"500px"} withBorder>
                 <h2>{title}</h2>
 
