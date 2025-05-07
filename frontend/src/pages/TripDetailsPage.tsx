@@ -182,6 +182,12 @@ const TripDetailsPage = () => {
                                 </Group>
                             </Flex>
 
+                            <Flex pt="md" wrap={'wrap'} style={{ maxWidth: '100%' }}>
+                                <Text lineClamp={3} style={{ width: '100%', overflowWrap: 'break-word' }}>
+                                    {trip.description || 'No description available'}
+                                </Text>
+                            </Flex>
+
                             <DestinationListCard tripId={trip.id} totalNights={totalNights} destinations={destinations || []}></DestinationListCard>
                         </Paper>
                     </Container>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Trip } from '@/service'
-import { Card, Image, Text, Button, Group, ActionIcon} from '@mantine/core';
+import { Card, Image, Text, Button, Group, ActionIcon, Flex} from '@mantine/core';
 import { IconTrash } from '@tabler/icons-react'
 import { formatDate } from '@/utils/utils'
 import { modals } from '@mantine/modals';
@@ -54,7 +54,11 @@ export const TripCard: React.FC<TripCardProps> = ({trip, onClick}) => {
     
       <Text size="24px" fw={700} mb="sm">{name}</Text>
       <Text size="12px" c="dimmed" fw={700} mb="xs" >{formatDate(startDate)} - {formatDate(endDate)}</Text>
-      <Text size="14px" fw={300}>{description}</Text>
+      <Flex wrap={'wrap'} style={{ maxWidth: '100%' }}>
+          <Text lineClamp={1} style={{ width: '100%', overflowWrap: 'break-word' }}>
+              {trip.description || '\u00A0'}
+          </Text>
+      </Flex>
 
       <Group mt="xs">
         <Button radius="md" style={{ flex: 1 }} onClick={() => onClick?.(trip.id)}>
