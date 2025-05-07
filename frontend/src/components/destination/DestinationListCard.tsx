@@ -1,27 +1,71 @@
 import { useListState } from '@mantine/hooks'
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd'
-import { Table, ActionIcon, Container, Stack, Text, Group } from '@mantine/core'
+import { Table, ActionIcon, Container, Stack, Text, Pill, PillGroup } from '@mantine/core'
 import { IconGripVertical, IconPencil } from '@tabler/icons-react'
-import { Destination } from '@/service'
+import { Destination, DestinationService } from '@/service'
+import { ActionMenu } from '../ActionMenu'
+import { modals } from '@mantine/modals';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { DestinationForm } from './DestinationForm'
+
+
 
 interface DestinationListCardProps {
     destinations: Destination[];
+    tripId: string;
 }
 
-export const DestinationListCard: React.FC<DestinationListCardProps> = ({ destinations }) => {
+export const DestinationListCard: React.FC<DestinationListCardProps> = ({ tripId, destinations }) => {
     const [state, handlers] = useListState(destinations);
+    const [currentDestination, setCurrentDestination] = useState<Destination>();
+    const [isDestinationFormOpen, setDestinationForm] = useState(false);
+    const navigate = useNavigate();
+
+    const handleOpenDestinationForm = (destination : Destination) => {
+        setCurrentDestination(destination);
+        setDestinationForm(true);
+    }
+
+    const handleCloseDestinationForm = () => {
+        setDestinationForm(false);
+    } 
+    
+    const handleDelete = (destinationId : string) =>
+        modals.openConfirmModal({
+        title: "Delete destination",
+        centered: true,
+        children: (
+            <Text size="sm">
+            Are you sure you want to delete your Destination?
+            </Text>
+        ),
+        labels: { confirm: `Delete destination`, cancel: "Cancel" },
+        confirmProps: { color: 'red' },
+        onCancel: () => console.log('Cancel'),
+        onConfirm: async() => {
+        try {
+            await DestinationService.deleteDestination(destinationId ?? '');
+            console.log("Trip ID redirect: ", tripId);
+            navigate(`/trip/${tripId}`);
+            console.log("Destination delete successfully");
+        } catch (error) {
+            console.error('Failed to delete destination ', error)
+        }
+        },
+    });
 
     const formatActivities = (activities: string[]) => {
         if (!activities || activities.length === 0) return '-';
         
         return (
-            <Stack gap="xs" py="xs">
+            <PillGroup gap={4} py="xs">
                 {activities.map((activity, i) => (
-                    <Text key={i} size="sm" lineClamp={1}>
+                    <Pill key={i}>
                         {activity}
-                    </Text>
+                    </Pill>
                 ))}
-            </Stack>
+            </PillGroup>
         );
     };
 
@@ -61,9 +105,11 @@ export const DestinationListCard: React.FC<DestinationListCardProps> = ({ destin
                         {formatActivities(item.activities ?? [])}
                     </Table.Td>
                     <Table.Td width={70} align="center">
-                        <ActionIcon radius="xl" color="cyan" variant="filled" size={36}>
-                            <IconPencil size={20}/>
-                        </ActionIcon>
+                        <ActionMenu
+                            id={item.id}
+                            onEdit={() => handleOpenDestinationForm(item)}
+                            onDelete={() => handleDelete(item.id)}
+                        />                    
                     </Table.Td>
                 </Table.Tr>
             )}
@@ -71,6 +117,7 @@ export const DestinationListCard: React.FC<DestinationListCardProps> = ({ destin
     ));
     
     return (
+        <>
         <Container my="xl" size="lg" p={0}>
             <Table.ScrollContainer minWidth={750}>
                 <DragDropContext
@@ -101,5 +148,16 @@ export const DestinationListCard: React.FC<DestinationListCardProps> = ({ destin
                 </DragDropContext>
             </Table.ScrollContainer>
         </Container>  
+        
+        { isDestinationFormOpen && (
+                            <DestinationForm 
+                                title="Add a destination"
+                                tripId={tripId}
+                                destination={currentDestination ?? null}
+                                onClose={handleCloseDestinationForm}
+                            />
+                        )}
+        </>
+        
     );
 }

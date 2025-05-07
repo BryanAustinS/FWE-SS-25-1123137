@@ -4,7 +4,7 @@ import { Trip, TripService, Destination, DestinationService } from '@/service';
 import { Image, Container, Paper, Title, Text, Flex, Group, Divider, Button, ActionIcon, Center, Loader} from '@mantine/core'; 
 import { EmptyCard } from '@/components/trip/EmptyCard';
 import { formatDate, calculateNights } from '@/utils/utils'
-import { IconUser, IconCalendar, IconPencil, IconMoon, IconArrowLeft, IconTrash } from '@tabler/icons-react'
+import { IconUser, IconCalendar, IconEdit, IconMoon, IconArrowLeft, IconTrash } from '@tabler/icons-react'
 import { DestinationListCard } from '@/components/destination/DestinationListCard';
 import { DestinationForm } from '@/components/destination/DestinationForm';
 import { modals } from '@mantine/modals';
@@ -134,7 +134,7 @@ const TripDetailsPage = () => {
                                 <Group pt="lg">
                                     <Button onClick={handleOpenDestinationForm} radius="md">Add a destination</Button>
                                     <ActionIcon size={36} radius="md" onClick={handleOpenTripForm}>
-                                        <IconPencil size={20} />
+                                        <IconEdit size={20} />
                                     </ActionIcon>
                                     <ActionIcon radius="md" size={36} onClick={handleDelete}>
                                         <IconTrash size={20}/>
@@ -174,7 +174,7 @@ const TripDetailsPage = () => {
                                 </Group>
                             </Flex>
 
-                            <DestinationListCard destinations={destinations || []}></DestinationListCard>
+                            <DestinationListCard tripId={trip.id} destinations={destinations || []}></DestinationListCard>
                         </Paper>
                     </Container>
                 </Flex>

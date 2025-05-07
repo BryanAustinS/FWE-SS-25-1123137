@@ -61,10 +61,10 @@ export const DestinationForm: React.FC<DestinationFormProps> = ({title, tripId, 
             try {
                 if (destination) {
                     await DestinationService.updateDestination(destination.id, destinationInput);
-                    navigate(`/destination/${destination.id}`)
+                    navigate(`/trip/${tripId}`)
                 } else {
                     await DestinationService.createDestination(destinationInput);
-                    navigate('/home')
+                    navigate(`/trip/${tripId}`)
                 }
                 onClose();
             } catch (error) {
@@ -84,20 +84,22 @@ export const DestinationForm: React.FC<DestinationFormProps> = ({title, tripId, 
                         <TextInput
                             required
                             label="Destination Name"
-                            placeholder="Where do you want to go"
+                            placeholder="Where do you want to go?"
                             {...form.getInputProps('name')}
                         />
 
                         <NumberInput
                             required
                             label="Amount of nights"
-                            placeholder="How long are you going to stay here"
+                            placeholder="How long are you going to stay here?"
                             min={0}
                             {...form.getInputProps('nights')}
                         />
 
                         <TagsInput
-                            label="Enter an activity"
+                            label="Enter your activities"
+                            description="Separate each activity with a comma (,)"
+                            placeholder='What are you going to do?'
                             maxTags={10}
                             clearable
                             allowDuplicates
