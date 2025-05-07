@@ -11,11 +11,15 @@ interface DestinationFormProps {
     title: string;
     tripId: string;
     destination: Destination | null;
+    currentNights: number;
+    totalNights: number;
     onClose: () => void;
 }
 
-export const DestinationForm: React.FC<DestinationFormProps> = ({title, tripId, destination, onClose}) => {
+export const DestinationForm: React.FC<DestinationFormProps> = ({title, tripId, destination, currentNights, totalNights, onClose}) => {
     const navigate = useNavigate();
+
+    console.log("TotalNights: ", totalNights, " currentNights: ", currentNights, " destinationNights: ", destination?.nights);
 
     let form = useForm({
         initialValues: {
@@ -25,7 +29,19 @@ export const DestinationForm: React.FC<DestinationFormProps> = ({title, tripId, 
         },
         validate: {
             name: (value) => (value.trim().length === 0 ? 'Destination name is required' : null),
-            nights: (value) => ((value ?? 0) < 1 ? 'Amount of nights should be more than 0' : null),
+            nights: (value) => {
+                if ((value ?? 0) < 1) {
+                    return 'Amount of nights should be more than 0';
+                }
+                const otherDestinationsNights = currentNights - (destination?.nights ?? 0);
+                const availableNights = totalNights - otherDestinationsNights;
+                
+                if ((value ?? 0) > availableNights) {
+                    return 'Nights longer than intended duration of stay';
+                }
+                
+                return null;
+            },
             activities: (value) => ((value?.length ?? 0) < 1 ? 'At least one activity is required' : null)
         }
     })  

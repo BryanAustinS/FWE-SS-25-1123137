@@ -14,9 +14,10 @@ import { DestinationForm } from './DestinationForm'
 interface DestinationListCardProps {
     destinations: Destination[];
     tripId: string;
+    totalNights: number;
 }
 
-export const DestinationListCard: React.FC<DestinationListCardProps> = ({ tripId, destinations }) => {
+export const DestinationListCard: React.FC<DestinationListCardProps> = ({ tripId, totalNights, destinations }) => {
     const [state, handlers] = useListState(destinations);
     const [currentDestination, setCurrentDestination] = useState<Destination>();
     const [isDestinationFormOpen, setDestinationForm] = useState(false);
@@ -69,6 +70,14 @@ export const DestinationListCard: React.FC<DestinationListCardProps> = ({ tripId
         );
     };
 
+    const currentNights = () => {
+        let sum = 0;
+        destinations.forEach((destination) => {
+            sum += destination.nights ? destination.nights : 0;
+        });
+        return sum;
+    }
+
     const items = state.map((item, index) => (
         <Draggable key={item.id} index={index} draggableId={item.id}>
             {(provided, snapshot) => (
@@ -118,6 +127,8 @@ export const DestinationListCard: React.FC<DestinationListCardProps> = ({ tripId
     
     return (
         <>
+        {destinations.length != 0 && 
+    
         <Container my="xl" size="lg" p={0}>
             <Table.ScrollContainer minWidth={750}>
                 <DragDropContext
@@ -148,16 +159,20 @@ export const DestinationListCard: React.FC<DestinationListCardProps> = ({ tripId
                 </DragDropContext>
             </Table.ScrollContainer>
         </Container>  
+        }
         
         { isDestinationFormOpen && (
-                            <DestinationForm 
-                                title="Add a destination"
-                                tripId={tripId}
-                                destination={currentDestination ?? null}
-                                onClose={handleCloseDestinationForm}
-                            />
-                        )}
+            <DestinationForm 
+                title={currentDestination ? "Edit a destination" : "Add a destination"}
+                totalNights={totalNights}
+                currentNights={currentNights()}
+                tripId={tripId}
+                destination={currentDestination ?? null}
+                onClose={handleCloseDestinationForm}
+            />
+        )}
         </>
         
     );
+    
 }

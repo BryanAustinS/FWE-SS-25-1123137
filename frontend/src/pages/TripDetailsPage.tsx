@@ -95,6 +95,14 @@ const TripDetailsPage = () => {
         }, [id, location.key]);
 
     let totalNights = trip?.startDate && trip?.endDate ? calculateNights(trip.startDate, trip.endDate) : 0; 
+
+    const currentNights = () => {
+        let sum = 0;
+        destinations?.forEach((destination) => {
+            sum += destination.nights ? destination.nights : 0;
+        });
+        return sum;
+    }
     
     if (isLoading) {
         return (
@@ -174,7 +182,7 @@ const TripDetailsPage = () => {
                                 </Group>
                             </Flex>
 
-                            <DestinationListCard tripId={trip.id} destinations={destinations || []}></DestinationListCard>
+                            <DestinationListCard tripId={trip.id} totalNights={totalNights} destinations={destinations || []}></DestinationListCard>
                         </Paper>
                     </Container>
                 </Flex>
@@ -192,6 +200,8 @@ const TripDetailsPage = () => {
                         title="Add a destination"
                         tripId={trip.id}
                         destination={null}
+                        currentNights={currentNights()}
+                        totalNights={totalNights}
                         onClose={handleCloseDestinationForm}
                     />
                 )}
