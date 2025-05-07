@@ -95,7 +95,7 @@ export const TripForm: React.FC<TripFormProps> = ({title, trip, onClose}) => {
     }
 
     return (        
-        <Overlay blur={2} fixed zIndex={1000} center>
+        <Overlay blur={2} fixed center>
             <Paper shadow="sm" py="md" px="xl" radius="md" w={"500px"} withBorder>
                 <h2>{title}</h2>
 

@@ -6,6 +6,7 @@ import { EmptyCard } from '@/components/trip/EmptyCard';
 import { formatDate, calculateNights } from '@/utils/utils'
 import { IconUser, IconCalendar, IconPencil, IconMoon, IconArrowLeft, IconTrash } from '@tabler/icons-react'
 import { DestinationListCard } from '@/components/destination/DestinationListCard';
+import { DestinationForm } from '@/components/destination/DestinationForm';
 import { modals } from '@mantine/modals';
 import { TripForm } from '@/components/trip/TripForm'
 
@@ -16,15 +17,24 @@ const TripDetailsPage = () => {
     const [destinations, setDestinations] = useState<Destination[]>();
     const location = useLocation();
     const navigate = useNavigate();
-    const [isFormOpen, setFormOpen] = useState(false);
+    const [isTripFormOpen, setTripForm] = useState(false);
+    const [isDestinationFormOpen, setDestinationForm] = useState(false);
     const [isLoading, setLoading] = useState(false);
     
-    const handleOpenForm = () => {
-        setFormOpen(true);
+    const handleOpenTripForm = () => {
+        setTripForm(true);
     }
 
-    const handleCloseForm = () => {
-        setFormOpen(false);
+    const handleCloseTripForm = () => {
+        setTripForm(false);
+    } 
+
+    const handleOpenDestinationForm = () => {
+        setDestinationForm(true);
+    }
+
+    const handleCloseDestinationForm = () => {
+        setDestinationForm(false);
     } 
 
     const handleDelete = () =>
@@ -122,8 +132,8 @@ const TripDetailsPage = () => {
                             <Flex justify="space-between" align="center">
                                 <Title pt="lg" pb="sm" fw={1000}>{trip.name}</Title>
                                 <Group pt="lg">
-                                    <Button radius="md">Add a destination</Button>
-                                    <ActionIcon size={36} radius="md" onClick={handleOpenForm}>
+                                    <Button onClick={handleOpenDestinationForm} radius="md">Add a destination</Button>
+                                    <ActionIcon size={36} radius="md" onClick={handleOpenTripForm}>
                                         <IconPencil size={20} />
                                     </ActionIcon>
                                     <ActionIcon radius="md" size={36} onClick={handleDelete}>
@@ -169,11 +179,20 @@ const TripDetailsPage = () => {
                     </Container>
                 </Flex>
 
-                { isFormOpen && (
+                { isTripFormOpen && (
                     <TripForm 
                         title="Update your Trip"
                         trip={trip}
-                        onClose={handleCloseForm}
+                        onClose={handleCloseTripForm}
+                    />
+                )}
+
+                { isDestinationFormOpen && (
+                    <DestinationForm 
+                        title="Add a destination"
+                        tripId={trip.id}
+                        destination={null}
+                        onClose={handleCloseDestinationForm}
                     />
                 )}
 
