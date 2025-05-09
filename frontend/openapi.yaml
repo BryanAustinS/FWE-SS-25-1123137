@@ -33,9 +33,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Trip'
+                
   /api/trip/name/{name}:
     get:
-      summary: Find trips by name
+      summary: Find trips by exact name
       description: Returns trips with an exact name match
       operationId: getTripByName
       parameters:
@@ -54,6 +55,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Trip'
+                  
+  /api/trip/namecontains/{namecontains}:
+    get:
+      summary: Find trips by name contains
+      description: Returns trips with a similar name match
+      operationId: getTripByNameContains
+      parameters:
+        - name: namecontains
+          in: path
+          description: Name substring to search for
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trip'
+
   /api/trip/date/{date}:
     get:
       summary: Find trips by date

@@ -51,6 +51,15 @@ export const TripService = {
         }
     },
 
+    getTripByNameContains: async (name: string) : Promise<Trip[]> => {
+        try {
+            return await apiClient.getTripByNameContains({namecontains: name});
+        } catch (error) {
+            console.error('Error fetching trips by name: ', error);
+            throw error;  
+        }
+    },
+
     createTrip: async (tripData: TripInput): Promise<Trip> => {
         try {
             return await apiClient.createTrip({ tripInput: tripData });
@@ -126,6 +135,15 @@ export const DestinationService = {
             return await apiClient.getDestinationByName({name});
         } catch (error) {
             console.error('Error fetching destinations by name: ', error);
+            throw error;
+        }
+    },
+
+    getDestinationByNameContains: async (name: string): Promise<Destination[]> => {
+        try {
+            return await apiClient.getDestinationByNameContains({namecontains: name});
+        } catch (error) {
+            console.error('Error fetching destinations by name contains: ', error);
             throw error;
         }
     },

@@ -81,6 +81,10 @@ export interface GetTripByNameRequest {
     name: string;
 }
 
+export interface GetTripByNameContainsRequest {
+    namecontains: string;
+}
+
 export interface UpdateDestinationRequest {
     id: string;
     destinationUpdate: DestinationUpdate;
@@ -92,9 +96,262 @@ export interface UpdateTripRequest {
 }
 
 /**
+ * DefaultApi - interface
+ * 
+ * @export
+ * @interface DefaultApiInterface
+ */
+export interface DefaultApiInterface {
+    /**
+     * 
+     * @summary Create a destination
+     * @param {DestinationInput} destinationInput 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    createDestinationRaw(requestParameters: CreateDestinationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Destination>>;
+
+    /**
+     * Create a destination
+     */
+    createDestination(requestParameters: CreateDestinationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Destination>;
+
+    /**
+     * 
+     * @summary Create a trip
+     * @param {TripInput} tripInput 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    createTripRaw(requestParameters: CreateTripRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Trip>>;
+
+    /**
+     * Create a trip
+     */
+    createTrip(requestParameters: CreateTripRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Trip>;
+
+    /**
+     * 
+     * @summary Delete a destination
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    deleteDestinationRaw(requestParameters: DeleteDestinationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Destination>>;
+
+    /**
+     * Delete a destination
+     */
+    deleteDestination(requestParameters: DeleteDestinationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Destination>;
+
+    /**
+     * 
+     * @summary Delete a trip
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    deleteTripRaw(requestParameters: DeleteTripRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Trip>>;
+
+    /**
+     * Delete a trip
+     */
+    deleteTrip(requestParameters: DeleteTripRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Trip>;
+
+    /**
+     * 
+     * @summary Get all destinations
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    getAllDestinationsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Destination>>>;
+
+    /**
+     * Get all destinations
+     */
+    getAllDestinations(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Destination>>;
+
+    /**
+     * 
+     * @summary Get all trips
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    getAllTripsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Trip>>>;
+
+    /**
+     * Get all trips
+     */
+    getAllTrips(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Trip>>;
+
+    /**
+     * 
+     * @summary Get a destination by ID
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    getDestinationByIdRaw(requestParameters: GetDestinationByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Destination>>;
+
+    /**
+     * Get a destination by ID
+     */
+    getDestinationById(requestParameters: GetDestinationByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Destination>;
+
+    /**
+     * 
+     * @summary Find destinations by exact name
+     * @param {string} name 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    getDestinationByNameRaw(requestParameters: GetDestinationByNameRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Destination>>>;
+
+    /**
+     * Find destinations by exact name
+     */
+    getDestinationByName(requestParameters: GetDestinationByNameRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Destination>>;
+
+    /**
+     * 
+     * @summary Find destinations containing name
+     * @param {string} namecontains 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    getDestinationByNameContainsRaw(requestParameters: GetDestinationByNameContainsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Destination>>>;
+
+    /**
+     * Find destinations containing name
+     */
+    getDestinationByNameContains(requestParameters: GetDestinationByNameContainsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Destination>>;
+
+    /**
+     * Returns all destinations associated with a specific trip ID
+     * @summary Get destinations by trip ID
+     * @param {string} tripId The ID of the trip to fetch destinations for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    getDestinationByTripIdRaw(requestParameters: GetDestinationByTripIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Destination>>>;
+
+    /**
+     * Returns all destinations associated with a specific trip ID
+     * Get destinations by trip ID
+     */
+    getDestinationByTripId(requestParameters: GetDestinationByTripIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Destination>>;
+
+    /**
+     * Returns trips matching a given date
+     * @summary Find trips by date
+     * @param {string} date Date to search for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    getTripByDateRaw(requestParameters: GetTripByDateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Trip>>>;
+
+    /**
+     * Returns trips matching a given date
+     * Find trips by date
+     */
+    getTripByDate(requestParameters: GetTripByDateRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Trip>>;
+
+    /**
+     * 
+     * @summary Get a trip by ID
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    getTripByIdRaw(requestParameters: GetTripByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Trip>>;
+
+    /**
+     * Get a trip by ID
+     */
+    getTripById(requestParameters: GetTripByIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Trip>;
+
+    /**
+     * Returns trips with an exact name match
+     * @summary Find trips by exact name
+     * @param {string} name Name to search for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    getTripByNameRaw(requestParameters: GetTripByNameRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Trip>>>;
+
+    /**
+     * Returns trips with an exact name match
+     * Find trips by exact name
+     */
+    getTripByName(requestParameters: GetTripByNameRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Trip>>;
+
+    /**
+     * Returns trips with a similar name match
+     * @summary Find trips by name contains
+     * @param {string} namecontains Name substring to search for
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    getTripByNameContainsRaw(requestParameters: GetTripByNameContainsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Trip>>>;
+
+    /**
+     * Returns trips with a similar name match
+     * Find trips by name contains
+     */
+    getTripByNameContains(requestParameters: GetTripByNameContainsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Trip>>;
+
+    /**
+     * 
+     * @summary Update a destination
+     * @param {string} id 
+     * @param {DestinationUpdate} destinationUpdate 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    updateDestinationRaw(requestParameters: UpdateDestinationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Destination>>;
+
+    /**
+     * Update a destination
+     */
+    updateDestination(requestParameters: UpdateDestinationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Destination>;
+
+    /**
+     * 
+     * @summary Update a trip
+     * @param {string} id 
+     * @param {TripUpdate} tripUpdate 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApiInterface
+     */
+    updateTripRaw(requestParameters: UpdateTripRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Trip>>;
+
+    /**
+     * Update a trip
+     */
+    updateTrip(requestParameters: UpdateTripRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Trip>;
+
+}
+
+/**
  * 
  */
-export class DefaultApi extends runtime.BaseAPI {
+export class DefaultApi extends runtime.BaseAPI implements DefaultApiInterface {
 
     /**
      * Create a destination
@@ -490,7 +747,7 @@ export class DefaultApi extends runtime.BaseAPI {
 
     /**
      * Returns trips with an exact name match
-     * Find trips by name
+     * Find trips by exact name
      */
     async getTripByNameRaw(requestParameters: GetTripByNameRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Trip>>> {
         if (requestParameters['name'] == null) {
@@ -516,10 +773,45 @@ export class DefaultApi extends runtime.BaseAPI {
 
     /**
      * Returns trips with an exact name match
-     * Find trips by name
+     * Find trips by exact name
      */
     async getTripByName(requestParameters: GetTripByNameRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Trip>> {
         const response = await this.getTripByNameRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Returns trips with a similar name match
+     * Find trips by name contains
+     */
+    async getTripByNameContainsRaw(requestParameters: GetTripByNameContainsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Trip>>> {
+        if (requestParameters['namecontains'] == null) {
+            throw new runtime.RequiredError(
+                'namecontains',
+                'Required parameter "namecontains" was null or undefined when calling getTripByNameContains().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/api/trip/namecontains/{namecontains}`.replace(`{${"namecontains"}}`, encodeURIComponent(String(requestParameters['namecontains']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(TripFromJSON));
+    }
+
+    /**
+     * Returns trips with a similar name match
+     * Find trips by name contains
+     */
+    async getTripByNameContains(requestParameters: GetTripByNameContainsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Trip>> {
+        const response = await this.getTripByNameContainsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
