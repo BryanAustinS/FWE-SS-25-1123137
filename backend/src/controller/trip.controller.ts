@@ -129,17 +129,84 @@ export class TripController {
         details: error.message,
       });
     }
-  };
+  }; 
 
-  getByDestination = async (
+  getTripByNameContains = async (
     req: Request,
     res: Response
-  ) => {};
+   ) => {
+    try {
+      const name = req.params.namecontains;
+
+      if (
+        !name ||
+        typeof name !== 'string'
+      ) {
+        return res.status(400).json({
+          error:
+            'Invalid name parameter',
+        });
+      }
+      
+      const result =
+        await this.tripRepository.getTripByNameContains(
+          name
+        );
+      return res
+        .status(200)
+        .json(result);
+
+    } catch (error: any) {
+      console.error(
+        'Error fetching trip by name:',
+        error
+      );
+      return res.status(500).json({
+        error:
+          'Failed to fetch trip by name',
+        details: error.message,
+      });
+    }  
+   };
 
   getByDate = async (
     req: Request,
     res: Response
-  ) => {};
+  ) => {
+    try {
+      const date = req.params.date;
+
+      if (
+        !date ||
+        typeof date !== 'string'
+      ) {
+        return res.status(400).json({
+          error:
+            'Invalid date parameter',
+        });
+      }
+
+      const result =
+      await this.tripRepository.getTripByDate(
+          date
+        );
+      return res
+        .status(200)
+        .json(result);
+      
+      
+    } catch (error: any) {
+      console.error(
+        'Error fetching trip by name:',
+        error
+      );
+      return res.status(500).json({
+        error:
+          'Failed to fetch trip by name',
+        details: error.message,
+      });
+      }
+  };
 
   update = async (
     req: Request,

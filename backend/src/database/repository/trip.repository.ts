@@ -1,6 +1,6 @@
 import { Database } from '../index';
 import { trip } from '../schema/trip.schema';
-import { eq } from 'drizzle-orm';
+import { eq, ilike, and, lte, gte, gt } from 'drizzle-orm';
 
 export class TripRepository {
   constructor(
@@ -36,9 +36,30 @@ export class TripRepository {
       .where(eq(trip.name, name));
   }
 
-  async getTripByDestination() {}
+  async getTripByDate(
+    date: string
+  ) {
+    return await this.database.select().from(trip).where(
+      and(
+        gte(trip.endDate, date),
+        lte(trip.startDate, date)
+      )
+    )
+  }
 
-  async getTripByDate() {}
+  async getTripByNameContains(
+      name: string
+    ) {
+      return await this.database
+        .select()
+        .from(trip)
+        .where(
+          ilike(
+            trip.name,
+            `%${name}%`
+          )
+        );
+    }
 
   async updateTrip(
     id: string,

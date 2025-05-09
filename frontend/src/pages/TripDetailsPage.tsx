@@ -184,7 +184,7 @@ const TripDetailsPage = () => {
 
                             <Flex pt="md" wrap={'wrap'} style={{ maxWidth: '100%' }}>
                                 <Text lineClamp={3} style={{ width: '100%', overflowWrap: 'break-word' }}>
-                                    {trip.description || 'No description available'}
+                                    {trip.description || ''}
                                 </Text>
                             </Flex>
 

@@ -47,8 +47,6 @@ export class Routes {
       }
     );
 
-    //TODO: getByDestination
-
     this.router.get(
       '/trip/date/:date',
       (req, res) => {
@@ -63,6 +61,16 @@ export class Routes {
       '/trip/:id',
       (req, res) => {
         this.tripController.getId(
+          req,
+          res
+        );
+      }
+    );
+
+    this.router.get(
+      '/trip/namecontains/:namecontains',
+      (req, res) => {
+        this.tripController.getTripByNameContains(
           req,
           res
         );
