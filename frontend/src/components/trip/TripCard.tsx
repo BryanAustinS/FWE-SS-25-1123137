@@ -53,7 +53,7 @@ export const TripCard: React.FC<TripCardProps> = ({trip, onClick}) => {
       </Card.Section>
     
       <Text size="24px" fw={700} mb="sm">{name}</Text>
-      <Text size="12px" c="dimmed" fw={700} mb="xs" >{formatDate(startDate)} - {formatDate(endDate)}</Text>
+      <Text size="12px" c="dimmed" mb="xs" >{formatDate(startDate)} - {formatDate(endDate)}</Text>
       <Flex wrap={'wrap'} style={{ maxWidth: '100%' }}>
           <Text lineClamp={1} style={{ width: '100%', overflowWrap: 'break-word' }}>
               {trip.description || '\u00A0'}

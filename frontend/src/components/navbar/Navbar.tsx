@@ -4,6 +4,8 @@ import classes from './Navbar.module.css';
 import { useState } from 'react'
 import { TripForm } from '@/components/trip/TripForm'
 import { IconArrowRight } from '@tabler/icons-react'
+import SearchBar from './SearchBar';
+
 interface NavbarProps {
   onClick?: () => void
 }
@@ -27,21 +29,9 @@ export function Navbar({ onClick }: NavbarProps) {
           <Text fw={700} size="xl" onClick={onClick}>Triplanner</Text>
         </Group>
 
-        <Group>
-          <TextInput
-            className={classes.search}
-            placeholder="Search for Trip or Destination"
-            leftSection={<IconSearch size={16} stroke={1.5} />}
-            rightSection={
-              <ActionIcon size={24} radius="md" variant="outline">
-                <IconArrowRight size={18} stroke={1.5} />
-              </ActionIcon>
-            }
-            visibleFrom="xs"
-            style={{width: '500px'}}
-            radius='md'
-          />
-        </Group>
+        <div className='navbar-search'>
+          <SearchBar />
+        </div>
 
         <Group visibleFrom="sm">
           <Button variant="lights" radius='md' onClick={handleOpenForm}>Create a Trip</Button>

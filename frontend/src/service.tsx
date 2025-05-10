@@ -51,6 +51,15 @@ export const TripService = {
         }
     },
 
+    getTripByDate: async (date: string): Promise<Trip[]> => {
+        try {
+            return await apiClient.getTripByDate({date});
+        } catch (error) {
+            console.error('Error fetching trips by date: ', error);
+            throw error;
+        }
+    },
+
     getTripByNameContains: async (name: string) : Promise<Trip[]> => {
         try {
             return await apiClient.getTripByNameContains({namecontains: name});
