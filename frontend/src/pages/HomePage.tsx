@@ -105,7 +105,7 @@ const HomePage = () => {
         return (
             <>
                 {isSearchResults && (
-                    <Container size="xl" mt="md">
+                    <Container size="xl" mt="md" pb="md">
                         <Group p="apart">
                             <Group>
                                 <Text fw={500} size="lg">Search Results</Text>

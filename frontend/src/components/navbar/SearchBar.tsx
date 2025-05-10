@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Group, TextInput, ActionIcon, Popover, Select } from '@mantine/core';
+import { Group, TextInput, ActionIcon, Popover, Select, Flex } from '@mantine/core';
 import { IconSearch, IconCalendarEvent, IconFilter, IconX } from '@tabler/icons-react';
 import { DateInput } from '@mantine/dates'
 
@@ -14,7 +14,6 @@ const SearchBar = () => {
     const [searchType, setSearchType] = useState(searchParams.get('type') || 'all');
     const navigate = useNavigate();
 
-    // Update the search term when the URL parameters change
     useEffect(() => {
         setSearchTerm(searchParams.get('query') || '');
         setSearchDate(searchParams.get('date') ? new Date(searchParams.get('date') as string) : null);
@@ -29,7 +28,6 @@ const SearchBar = () => {
         }
         
         if (searchDate) {
-            // Format date as YYYY-MM-DD
             const formattedDate = searchDate.toISOString().split('T')[0];
             params.set('date', formattedDate);
         }
@@ -38,7 +36,6 @@ const SearchBar = () => {
             params.set('type', searchType);
         }
         
-        // Check if we have any search parameters
         if (params.toString()) {
             navigate(`/home?${params.toString()}`);
         } else {
@@ -58,6 +55,7 @@ const SearchBar = () => {
     return (
         <Group gap="xs">
             <TextInput
+                radius='md'
                 placeholder="Search trips..."
                 leftSection={<IconSearch size={16} />}
                 value={searchTerm}
@@ -74,19 +72,20 @@ const SearchBar = () => {
                         </ActionIcon>
                     ) : null
                 }
-                style={{ minWidth: '250px' }}
+                style={{ minWidth: '400px' }}
             />
             
             <Popover
                 opened={opened}
-                onChange={setOpened}
                 position="bottom-end"
-                width={300}
+                width={400}
+                radius="md"
+                shadow='md'
             >
                 <Popover.Target>
                     <ActionIcon 
                         variant="subtle" 
-                        color="gray" 
+                        color="yellow.6" 
                         onClick={() => setOpened((o) => !o)}
                         aria-label="Advanced search options"
                     >
@@ -94,14 +93,14 @@ const SearchBar = () => {
                     </ActionIcon>
                 </Popover.Target>
                 <Popover.Dropdown>
-                    <Group grow>
+                    <Flex direction="row" align="center" justify="center"gap="sm">
                         <Select
-                            label="Search in"
+                            label="Filter by category"
                             data={[
                                 { value: 'all', label: 'All' },
                                 { value: 'trip', label: 'Trip names' },
                                 { value: 'destination', label: 'Destination names' },
-                                { value: 'date', label: 'Dates only' }
+                                { value: 'date', label: 'Date'}
                             ]}
                             value={searchType}
                             onChange={(value) => setSearchType(value || 'all')}
@@ -115,13 +114,7 @@ const SearchBar = () => {
                             leftSection={<IconCalendarEvent size={16} />}
                             clearable
                         />
-                        
-                        <Group p="right" mt="md">
-                            <ActionIcon variant="filled" color="blue" onClick={handleSearch}>
-                                <IconSearch size={16} />
-                            </ActionIcon>
-                        </Group>
-                    </Group>
+                    </Flex>
                 </Popover.Dropdown>
             </Popover>
         </Group>

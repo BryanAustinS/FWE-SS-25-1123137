@@ -26,7 +26,7 @@ export function Navbar({ onClick }: NavbarProps) {
     <header className={classes.header}>
       <div className={classes.inner}>
         <Group>
-          <Text fw={700} size="xl" onClick={onClick}>Triplanner</Text>
+          <Text c="white" fw={700} size="xl" onClick={onClick}>Triplanner</Text>
         </Group>
 
         <div className='navbar-search'>
@@ -34,7 +34,7 @@ export function Navbar({ onClick }: NavbarProps) {
         </div>
 
         <Group visibleFrom="sm">
-          <Button variant="lights" radius='md' onClick={handleOpenForm}>Create a Trip</Button>
+          <Button radius='md' onClick={handleOpenForm}>Create a Trip</Button>
         </Group>
       </div>
     </header>
