@@ -85,7 +85,7 @@ const SearchBar = () => {
                 <Popover.Target>
                     <ActionIcon 
                         variant="subtle" 
-                        color="yellow.6" 
+                        color="white" 
                         onClick={() => setOpened((o) => !o)}
                         aria-label="Advanced search options"
                     >

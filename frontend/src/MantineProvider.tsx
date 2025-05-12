@@ -18,17 +18,17 @@ const theme = createTheme({
       "#11227d" // 9: main
     ],
     yellow:[
-  "#fffde1",
-  "#fffacb",
-  "#fff59a",
-  "#fff064",
-  "#ffeb38",
-  "#ffe81d",
-  "#ffe603",
-  "#e3cc00",
-  "#c9b600",
-  "#ad9c00"
-]
+      "#fffde1",
+      "#fffacb",
+      "#fff59a",
+      "#fff064",
+      "#ffeb38",
+      "#ffe81d",
+      "#ffe603",
+      "#e3cc00",
+      "#c9b600",
+      "#ad9c00"
+    ]
   },
   fontFamily: 'Inter, sans-serif',
   
