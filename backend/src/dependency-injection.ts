@@ -26,8 +26,8 @@ export const DI = {} as {
     destination: DestinationController;
   };
   services: {
-    unsplash: UnsplashService
-  }
+    unsplash: UnsplashService;
+  };
 };
 
 export function initializeDI() {
@@ -43,7 +43,7 @@ export function initializeDI() {
 
   DI.services = {
     unsplash: new UnsplashService(),
-  }
+  };
 
   // Initialize Controller
   DI.controller = {

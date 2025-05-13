@@ -3,7 +3,10 @@ import {
   Response,
 } from 'express';
 import * as DestinationRepository from '../database/repository/destination.repository';
-import { createDestinationSchema, updateDestinationSchema } from '../validation/validation';
+import {
+  createDestinationSchema,
+  updateDestinationSchema,
+} from '../validation/validation';
 
 export class DestinationController {
   constructor(
@@ -16,7 +19,10 @@ export class DestinationController {
   ) => {
     try {
       const destinationData = req.body;
-      const validatedData = createDestinationSchema.parse(destinationData);
+      const validatedData =
+        createDestinationSchema.parse(
+          destinationData
+        );
       const result =
         await this.destinationRepository.createDestination(
           validatedData
@@ -24,7 +30,7 @@ export class DestinationController {
       return res
         .status(201)
         .json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(
         'Error creating destination:',
         error
@@ -32,7 +38,7 @@ export class DestinationController {
       return res.status(500).json({
         error:
           'Failed to create destination',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error occurred',
       });
     }
   };
@@ -47,7 +53,7 @@ export class DestinationController {
       return res
         .status(200)
         .json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(
         'Error fetching destination: ',
         error
@@ -55,7 +61,7 @@ export class DestinationController {
       return res.status(500).json({
         error:
           'Failed to fetch all destinations',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error occurred',
       });
     }
   };
@@ -74,7 +80,7 @@ export class DestinationController {
       return res
         .status(200)
         .json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(
         'Error in fetching destination by id: ',
         error
@@ -82,7 +88,7 @@ export class DestinationController {
       return res.status(500).json({
         error:
           'Failed to fetch destination by id',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error occurred',
       });
     }
   };
@@ -101,7 +107,7 @@ export class DestinationController {
       return res
         .status(200)
         .json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(
         'Error in fetching destination by trip id: ',
         error
@@ -109,7 +115,7 @@ export class DestinationController {
       return res.status(500).json({
         error:
           'Failed to fetch destination by trip id',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error occurred',
       });
     }
   };
@@ -137,7 +143,7 @@ export class DestinationController {
       return res
         .status(200)
         .json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(
         'Error in fetching destination by name: ',
         error
@@ -145,7 +151,7 @@ export class DestinationController {
       return res.status(500).json({
         error:
           'Failed to fetch destination by name',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error occurred',
       });
     }
   };
@@ -174,7 +180,7 @@ export class DestinationController {
       return res
         .status(200)
         .json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(
         'Error in fetching destination containing name: ',
         error
@@ -182,7 +188,7 @@ export class DestinationController {
       return res.status(500).json({
         error:
           'Failed to fetch destination containing name',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error occurred',
       });
     }
   };
@@ -206,7 +212,10 @@ export class DestinationController {
         });
       }
 
-      const validatedData = updateDestinationSchema.parse(destinationData)
+      const validatedData =
+        updateDestinationSchema.parse(
+          destinationData
+        );
 
       const result =
         await this.destinationRepository.updateDestination(
@@ -216,7 +225,7 @@ export class DestinationController {
       return res
         .status(200)
         .json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(
         'Error in updating destination: ',
         error
@@ -224,7 +233,7 @@ export class DestinationController {
       return res.status(500).json({
         error:
           'Failed to update destination',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error occurred',
       });
     }
   };
@@ -242,7 +251,7 @@ export class DestinationController {
       return res
         .status(200)
         .json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(
         'Error in deleting destination',
         error
@@ -250,7 +259,7 @@ export class DestinationController {
       return res.status(500).json({
         error:
           'Failed to delete destination',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error occurred',
       });
     }
   };

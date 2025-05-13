@@ -4,7 +4,10 @@ import {
 } from 'express';
 import * as TripRepository from '../database/repository/trip.repository';
 import { UnsplashService } from '../unsplash.service';
-import { createTripSchema, updateTripSchema } from '../validation/validation';
+import {
+  createTripSchema,
+  updateTripSchema,
+} from '../validation/validation';
 
 export class TripController {
   constructor(
@@ -19,12 +22,21 @@ export class TripController {
     try {
       const tripData = req.body;
 
-      if (!tripData.imageUrl && tripData.name){
-        tripData.imageUrl = await this.unsplashService.getTripImage(tripData.name);
+      if (
+        !tripData.imageUrl &&
+        tripData.name
+      ) {
+        tripData.imageUrl =
+          await this.unsplashService.getTripImage(
+            tripData.name
+          );
       }
 
-      const validatedData = createTripSchema.parse(tripData);
-      
+      const validatedData =
+        createTripSchema.parse(
+          tripData
+        );
+
       const result =
         await this.tripRepository.createTrip(
           validatedData
@@ -32,14 +44,14 @@ export class TripController {
       return res
         .status(201)
         .json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(
         'Error creating trip:',
         error
       );
       return res.status(500).json({
         error: 'Failed to create trip',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error occurred',
       });
     }
   };
@@ -54,7 +66,7 @@ export class TripController {
       return res
         .status(200)
         .json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(
         'Error fetching trips:',
         error
@@ -62,7 +74,7 @@ export class TripController {
       return res.status(500).json({
         error:
           'Failed to fetch all trips',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error occurred',
       });
     }
   };
@@ -81,7 +93,7 @@ export class TripController {
       return res
         .status(200)
         .json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(
         'Error fetching trip by id: ',
         error
@@ -89,7 +101,7 @@ export class TripController {
       return res.status(500).json({
         error:
           'Failed to fetch trip by id',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error occurred',
       });
     }
   };
@@ -118,7 +130,7 @@ export class TripController {
       return res
         .status(200)
         .json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(
         'Error fetching trip by name:',
         error
@@ -126,17 +138,18 @@ export class TripController {
       return res.status(500).json({
         error:
           'Failed to fetch trip by name',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error occurred',
       });
     }
-  }; 
+  };
 
   getTripByNameContains = async (
     req: Request,
     res: Response
-   ) => {
+  ) => {
     try {
-      const name = req.params.namecontains;
+      const name =
+        req.params.namecontains;
 
       if (
         !name ||
@@ -147,7 +160,7 @@ export class TripController {
             'Invalid name parameter',
         });
       }
-      
+
       const result =
         await this.tripRepository.getTripByNameContains(
           name
@@ -155,8 +168,7 @@ export class TripController {
       return res
         .status(200)
         .json(result);
-
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(
         'Error fetching trip by name:',
         error
@@ -164,10 +176,10 @@ export class TripController {
       return res.status(500).json({
         error:
           'Failed to fetch trip by name',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error occurred',
       });
-    }  
-   };
+    }
+  };
 
   getByDate = async (
     req: Request,
@@ -187,15 +199,13 @@ export class TripController {
       }
 
       const result =
-      await this.tripRepository.getTripByDate(
+        await this.tripRepository.getTripByDate(
           date
         );
       return res
         .status(200)
         .json(result);
-      
-      
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(
         'Error fetching trip by name:',
         error
@@ -203,9 +213,9 @@ export class TripController {
       return res.status(500).json({
         error:
           'Failed to fetch trip by name',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error occurred',
       });
-      }
+    }
   };
 
   update = async (
@@ -226,11 +236,20 @@ export class TripController {
         });
       }
 
-      if (!tripData.imageUrl && tripData.name){
-        tripData.imageUrl = await this.unsplashService.getTripImage(tripData.name);
+      if (
+        !tripData.imageUrl &&
+        tripData.name
+      ) {
+        tripData.imageUrl =
+          await this.unsplashService.getTripImage(
+            tripData.name
+          );
       }
 
-      const validatedData = updateTripSchema.parse(tripData);
+      const validatedData =
+        updateTripSchema.parse(
+          tripData
+        );
 
       const result =
         await this.tripRepository.updateTrip(
@@ -240,14 +259,14 @@ export class TripController {
       return res
         .status(200)
         .json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(
         'Error updating trip:',
         error
       );
       return res.status(500).json({
         error: 'Failed to update trip',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error occurred',
       });
     }
   };
@@ -276,14 +295,14 @@ export class TripController {
       return res
         .status(200)
         .json(result);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(
         'Error deleting trip: ',
         error
       );
       return res.status(500).json({
         error: 'Failed to delete trip',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error occurred',
       });
     }
   };

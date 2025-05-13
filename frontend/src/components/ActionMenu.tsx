@@ -1,6 +1,15 @@
-import React, { useState } from 'react';
-import { ActionIcon, Tooltip, Group, Box } from '@mantine/core';
-import { IconDots, IconEdit, IconTrash } from '@tabler/icons-react';
+import { useState } from 'react';
+import {
+  ActionIcon,
+  Tooltip,
+  Group,
+  Box,
+} from '@mantine/core';
+import {
+  IconDots,
+  IconEdit,
+  IconTrash,
+} from '@tabler/icons-react';
 
 interface ActionMenuProps {
   onEdit: () => void;
@@ -8,37 +17,50 @@ interface ActionMenuProps {
   id: string | number;
 }
 
-export function ActionMenu({ onEdit, onDelete, id }: ActionMenuProps) {
-  const [isHovered, setIsHovered] = useState(false);
+export function ActionMenu({
+  onEdit,
+  onDelete,
+}: ActionMenuProps) {
+  const [isHovered, setIsHovered] =
+    useState(false);
 
   return (
     <Box
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() =>
+        setIsHovered(true)
+      }
+      onMouseLeave={() =>
+        setIsHovered(false)
+      }
       style={{ position: 'relative' }}
     >
-      <ActionIcon variant="subtle" color="gray">
+      <ActionIcon
+        variant="subtle"
+        color="gray"
+      >
         <IconDots size={18} />
       </ActionIcon>
 
       {isHovered && (
-        <Group 
+        <Group
           style={{
             position: 'absolute',
             right: 0,
             top: '50%',
-            transform: 'translateY(-50%)',
+            transform:
+              'translateY(-50%)',
             background: 'white',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+            boxShadow:
+              '0 2px 8px rgba(0, 0, 0, 0.15)',
             borderRadius: '4px',
             padding: '4px',
             zIndex: 10,
           }}
         >
           <Tooltip label="Edit">
-            <ActionIcon 
-              color="blue" 
-              variant="light" 
+            <ActionIcon
+              color="blue"
+              variant="light"
               onClick={() => onEdit()}
               aria-label="Edit item"
             >
@@ -46,9 +68,9 @@ export function ActionMenu({ onEdit, onDelete, id }: ActionMenuProps) {
             </ActionIcon>
           </Tooltip>
           <Tooltip label="Delete">
-            <ActionIcon 
-              color="red" 
-              variant="light" 
+            <ActionIcon
+              color="red"
+              variant="light"
               onClick={() => onDelete()}
               aria-label="Delete item"
             >

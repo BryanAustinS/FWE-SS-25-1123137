@@ -29,11 +29,15 @@ export class DestinationRepository {
       .where(eq(destination.id, id));
   }
 
-  async getDestinationByTripId(tripId: string) {
+  async getDestinationByTripId(
+    tripId: string
+  ) {
     return await this.database
       .select()
       .from(destination)
-      .where(eq(destination.tripId, tripId));
+      .where(
+        eq(destination.tripId, tripId)
+      );
   }
 
   async getDestinationByName(

@@ -15,6 +15,8 @@ export const trip = pgTable('trip', {
   description: text(),
   startDate: date().notNull(),
   endDate: date().notNull(),
-  participants: integer().notNull().default(0),
+  participants: integer()
+    .notNull()
+    .default(0),
   imageUrl: text(),
 });
