@@ -82,7 +82,7 @@ const HomePage = () => {
         );
       case 'alpha-z-a':
         return sortedTrips.sort((a, b) => 
-          a.name.localeCompare(a.name)
+          b.name.localeCompare(a.name)
         );
       default:
         return sortedTrips;
