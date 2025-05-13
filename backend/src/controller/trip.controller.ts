@@ -57,6 +57,7 @@ export class TripController {
   };
 
   getAll = async (
+    req: Request,
     res: Response
   ) => {
     try {

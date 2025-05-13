@@ -44,6 +44,7 @@ export class DestinationController {
   };
 
   getAll = async (
+    req: Request,
     res: Response
   ) => {
     try {
