@@ -1,4 +1,7 @@
-import { MantineThemeProvider, createTheme } from '@mantine/core';
+import {
+  MantineThemeProvider,
+  createTheme,
+} from '@mantine/core';
 
 // You can customize your theme here
 const theme = createTheme({
@@ -7,7 +10,11 @@ const theme = createTheme({
   // Add other theme customizations
 });
 
-export function MantineRoot({ children }: { children: React.ReactNode }) {
+export function MantineRoot({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <MantineThemeProvider theme={theme}>
       {children}
