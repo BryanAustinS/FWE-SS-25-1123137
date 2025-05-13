@@ -42,8 +42,9 @@ const HomePage = () => {
     setIsSearchResults,
   ] = useState(false);
 
-  const [sortBy, setSortBy] =
-    useState('');
+  const [
+    sortBy, setSortBy
+  ] = useState('');
 
   const fetchTrips = async () => {
     setLoading(true);
@@ -61,46 +62,32 @@ const HomePage = () => {
 
   const getSortedTrips = () => {
     if (!sortBy || trips.length === 0) {
-      return trips;
+      return trips
     }
 
     const sortedTrips = [...trips];
 
     switch (sortBy) {
       case 'date-new-old':
-        return sortedTrips.sort(
-          (a, b) =>
-            new Date(
-              b.startDate
-            ).getTime() -
-            new Date(
-              a.startDate
-            ).getTime()
+        return sortedTrips.sort((a, b) => 
+          new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
         );
       case 'date-old-new':
-        return sortedTrips.sort(
-          (a, b) =>
-            new Date(
-              a.startDate
-            ).getTime() -
-            new Date(
-              b.startDate
-            ).getTime()
+        return sortedTrips.sort((a, b) => 
+          new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
         );
       case 'alpha-a-z':
-        return sortedTrips.sort(
-          (a, b) =>
-            a.name.localeCompare(b.name)
+        return sortedTrips.sort((a, b) => 
+          a.name.localeCompare(b.name)
         );
       case 'alpha-z-a':
-        return sortedTrips.sort(
-          (a, b) =>
-            b.name.localeCompare(a.name)
+        return sortedTrips.sort((a, b) => 
+          b.name.localeCompare(a.name)
         );
       default:
         return sortedTrips;
     }
-  };
+  }
 
   const handleSearch = async () => {
     setLoading(true);
@@ -285,60 +272,39 @@ const HomePage = () => {
         ))}
 
       <Container size="xl">
-        <Grid gutter="xl">
-          <Grid.Col span={3}>
-            <Select
-              size="sm"
-              leftSection={
-                <IconSortAscending
-                  size={16}
-                />
-              }
-              placeholder="Sort by"
-              variant="outline"
-              data={[
-                {
-                  value: 'date-new-old',
-                  label:
-                    'Sort Newest to Oldest',
-                },
-                {
-                  value: 'date-old-new',
-                  label:
-                    'Sort Oldest to Newest',
-                },
-                {
-                  value: 'alpha-a-z',
-                  label: 'A-Z',
-                },
-                {
-                  value: 'alpha-z-a',
-                  label: 'Z-A',
-                },
-              ]}
-              value={sortBy}
-              onChange={(value) =>
-                value !== null
-                  ? setSortBy(value)
-                  : null
-              }
-            ></Select>
-          </Grid.Col>
-        </Grid>
-        <Grid gutter="xl">
-          {getSortedTrips().map(
-            (trip) => (
-              <Grid.Col
-                key={trip.id}
-                span={4}
+        {trips.length > 0 && (
+          <Grid gutter="xl">
+            <Grid.Col span={3}>
+              <Select
+                size='sm'
+                leftSection={<IconSortAscending size={16} />}
+                placeholder='Sort by'
+                variant='outline'
+                data={[
+                  {value: 'date-new-old', label: 'Sort Newest to Oldest'},
+                  {value: 'date-old-new', label: 'Sort Oldest to Newest'},
+                  {value: 'alpha-a-z', label: 'A-Z'},
+                  {value: 'alpha-z-a', label: 'Z-A'},
+                ]}
+                value={sortBy}
+                onChange={(value) => value !== null ? setSortBy(value) : null}
               >
-                <TripCard
-                  trip={trip}
-                  onClick={onClickTrip}
-                />
-              </Grid.Col>
-            )
-          )}
+              </Select>
+            </Grid.Col>
+          </Grid>
+        )}
+        <Grid gutter="xl">
+          {getSortedTrips().map((trip) => (
+            <Grid.Col
+              key={trip.id}
+              span={4}
+            >
+              <TripCard
+                trip={trip}
+                onClick={onClickTrip}
+              />
+            </Grid.Col>
+          ))}
         </Grid>
       </Container>
     </>

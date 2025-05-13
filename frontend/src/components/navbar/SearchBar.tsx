@@ -129,7 +129,13 @@ const SearchBar = () => {
             >
               <IconX size={16} />
             </ActionIcon>
-          ) : null
+          ) : (
+            <ActionIcon
+              onClick={handleSearch}
+            >
+              <IconSearch size={16} />
+            </ActionIcon>
+          )
         }
         style={{ minWidth: '400px' }}
       />
