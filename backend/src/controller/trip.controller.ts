@@ -208,6 +208,14 @@ export class TripController {
         });
       }
 
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!dateRegex.test(date) || isNaN(Date.parse(date))) {
+      return res.status(400).json({
+        error: 'Invalid date format',
+        details: 'Date must be in YYYY-MM-DD format'
+      });
+    }
+
       const result =
         await this.tripRepository.getTripByDate(
           date
