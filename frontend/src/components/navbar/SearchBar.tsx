@@ -123,21 +123,11 @@ const SearchBar = () => {
           }
         }}
         rightSection={
-          searchTerm ? (
-            <ActionIcon
-              onClick={clearSearch}
-            >
-              <IconX size={16} />
-            </ActionIcon>
-          ) : (
-            <ActionIcon
-              onClick={handleSearch}
-            >
-              <IconSearch size={16} />
-            </ActionIcon>
-          )
+          <ActionIcon onClick={handleSearch}>
+            <IconSearch size={16} />
+          </ActionIcon>
         }
-        style={{ minWidth: '400px' }}
+        style={{ minWidth: '400px'}}
       />
 
       <Popover
