@@ -26,6 +26,7 @@ import {
 } from '@mantine/core';
 import { EmptyCard } from '@/components/trip/EmptyCard';
 import { IconSortAscending } from '@tabler/icons-react';
+import { TripForm } from '@/components/trip/TripForm';
 
 const HomePage = () => {
   const [trips, setTrips] = useState<
@@ -45,6 +46,17 @@ const HomePage = () => {
   const [
     sortBy, setSortBy
   ] = useState('');
+
+  const [isFormOpen, setFormOpen] =
+    useState(false);
+
+  const handleOpenForm = () => {
+    setFormOpen(true);
+  };
+
+  const handleCloseForm = () => {
+    setFormOpen(false);
+  };
 
   const fetchTrips = async () => {
     setLoading(true);
@@ -70,11 +82,11 @@ const HomePage = () => {
     switch (sortBy) {
       case 'date-new-old':
         return sortedTrips.sort((a, b) => 
-          new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+          new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
         );
       case 'date-old-new':
         return sortedTrips.sort((a, b) => 
-          new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+          new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
         );
       case 'alpha-a-z':
         return sortedTrips.sort((a, b) => 
@@ -268,8 +280,17 @@ const HomePage = () => {
           <EmptyCard
             msg="Looks like you don't have any trip..."
             buttonMsg="Create your first trip"
+            onButtonClick={handleOpenForm}
           />
         ))}
+
+      {isFormOpen && (
+              <TripForm
+                title="Create your new Trip"
+                trip={null}
+                onClose={handleCloseForm}
+              />
+            )}
 
       <Container size="xl">
         {trips.length > 0 && (
@@ -281,8 +302,8 @@ const HomePage = () => {
                 placeholder='Sort by'
                 variant='outline'
                 data={[
-                  {value: 'date-new-old', label: 'Sort Newest to Oldest'},
-                  {value: 'date-old-new', label: 'Sort Oldest to Newest'},
+                  {value: 'date-new-old', label: 'Sort Earliest to Latest'},
+                  {value: 'date-old-new', label: 'Sort Latest to Earliest'},
                   {value: 'alpha-a-z', label: 'A-Z'},
                   {value: 'alpha-z-a', label: 'Z-A'},
                 ]}

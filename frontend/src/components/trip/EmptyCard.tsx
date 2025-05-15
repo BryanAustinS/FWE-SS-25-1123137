@@ -25,7 +25,7 @@ export const EmptyCard: React.FC<
     if (onButtonClick) {
       onButtonClick();
     } else {
-      navigate('/create');
+      navigate('/home');
     }
   };
 
