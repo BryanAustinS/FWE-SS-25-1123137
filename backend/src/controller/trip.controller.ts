@@ -63,6 +63,12 @@ export class TripController {
     try {
       const result =
         await this.tripRepository.getAllTrip();
+      
+      if (result.length === 0) {
+        return res.status(204).json({
+          error: 'Get result is empty',
+        });
+      }
       return res
         .status(200)
         .json(result);
@@ -90,9 +96,16 @@ export class TripController {
         await this.tripRepository.getTripById(
           id
         );
+      if (result.length === 0) {
+        return res.status(404).json({
+          error: 'Trip not found',
+          details: `No trip exists with id: ${id}`
+        });
+      }
       return res
         .status(200)
         .json(result);
+
     } catch (error: unknown) {
       console.error(
         'Error fetching trip by id: ',
@@ -127,6 +140,13 @@ export class TripController {
         await this.tripRepository.getTripByName(
           name
         );
+
+      if (result.length === 0) {
+        return res.status(204).json({
+          error: 'Trip not found',
+          details: `No trip exists with name: ${name}`
+        });
+      }
       return res
         .status(200)
         .json(result);
@@ -165,6 +185,11 @@ export class TripController {
         await this.tripRepository.getTripByNameContains(
           name
         );
+      if (result.length === 0) {
+        return res.status(204).json({
+          error: 'Get result is empty',
+        });
+      }
       return res
         .status(200)
         .json(result);
@@ -202,6 +227,12 @@ export class TripController {
         await this.tripRepository.getTripByDate(
           date
         );
+      if (result.length === 0) {
+        return res.status(204).json({
+          error: 'Destination not found',
+          details: `No destination exists with date: ${date}`
+        });
+      }
       return res
         .status(200)
         .json(result);
@@ -230,9 +261,10 @@ export class TripController {
         await this.tripRepository.getTripById(
           id
         );
-      if (!trip) {
-        return res.status(404).json({
+      if (trip.length === 0) {
+        return res.status(204).json({
           error: 'Trip not found',
+          details: `No trip exists with id: ${id}`
         });
       }
 
@@ -282,9 +314,10 @@ export class TripController {
         await this.tripRepository.getTripById(
           id
         );
-      if (!trip) {
-        return res.status(404).json({
+      if (trip.length === 0) {
+        return res.status(204).json({
           error: 'Trip not found',
+          details: `No trip exists with id: ${id}`
         });
       }
 

@@ -50,6 +50,13 @@ export class DestinationController {
     try {
       const result =
         await this.destinationRepository.getAllDestination();
+
+      if (result.length === 0) {
+        return res.status(204).json({
+          error: 'Get result is empty',
+        });
+      }
+
       return res
         .status(200)
         .json(result);
@@ -77,6 +84,12 @@ export class DestinationController {
         await this.destinationRepository.getDestinationById(
           id
         );
+      if (result.length === 0) {
+        return res.status(404).json({
+          error: 'Destination not found',
+          details: `No destination exists with id: ${id}`
+        });
+      }
       return res
         .status(200)
         .json(result);
@@ -104,6 +117,12 @@ export class DestinationController {
         await this.destinationRepository.getDestinationByTripId(
           tripId
         );
+      if (result.length === 0) {
+        return res.status(404).json({
+          error: 'Destination not found',
+          details: `No destination exists with trip id: ${tripId}`
+        });
+      }
       return res
         .status(200)
         .json(result);
@@ -140,6 +159,12 @@ export class DestinationController {
         await this.destinationRepository.getDestinationByName(
           name
         );
+      if (result.length === 0) {
+        return res.status(204).json({
+          error: 'Destination not found',
+          details: `No destination exists with name: ${name}`
+        });
+      }
       return res
         .status(200)
         .json(result);
@@ -177,6 +202,11 @@ export class DestinationController {
         await this.destinationRepository.getDestinationByNameContains(
           name
         );
+      if (result.length === 0) {
+        return res.status(204).json({
+          error: 'Get result is empty',
+        });
+      }
       return res
         .status(200)
         .json(result);
@@ -205,10 +235,10 @@ export class DestinationController {
         await this.destinationRepository.getDestinationById(
           id
         );
-      if (!destination) {
-        return res.status(404).json({
-          error:
-            'Destination not found ',
+      if (destination.length === 0) {
+        return res.status(204).json({
+          error: 'Destination not found',
+          details: `No Destination exists with id: ${id}`
         });
       }
 
@@ -248,6 +278,12 @@ export class DestinationController {
         await this.destinationRepository.deleteDestination(
           id
         );
+      if (result.length === 0) {
+        return res.status(404).json({
+          error: 'Destination not found',
+          details: `No destination exists with id: ${id}`
+        });
+      }
       return res
         .status(200)
         .json(result);
