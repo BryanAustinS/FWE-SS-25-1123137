@@ -20,10 +20,21 @@ By Bryan Austin Suharta (1123137)
 - Delete destinations
 
 ### Freestyle 1 (without API)
-I implemented a sorting feature when viewing all the trips.
+I implemented a sorting feature when viewing all the trips. User is able to sort Trips 
+based on their earliest or latest start date and alphabetically
 
 ### Freestyle 2 (with API)
+Using image API from Unsplash.com
 
+What it does
+The application automatically fetches relevant travel images from Unsplash to serve as cover photos for each trip, enhancing the visual experience without requiring users to upload their own images.
+
+How it works
+1. When a user creates a trip, the backend extracts the trip name
+2. The name is sent as a search query to Unsplash's API
+3. The first matching image is retrieved and stored with the trip data
+4. This image is displayed as the trip's cover photo on the home page
+5. If the API call fails, a default backup image is used instead
 
 
 ## 🏗️ Project Structure
