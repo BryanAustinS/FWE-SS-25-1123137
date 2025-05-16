@@ -92,7 +92,7 @@ export class TripController {
         await this.tripRepository.getTripById(
           id
         );
-      if (result.length === 0) {
+      if (!result) {
         return res.status(404).json({
           error: 'Trip not found',
           details: `No trip exists with id: ${id}`

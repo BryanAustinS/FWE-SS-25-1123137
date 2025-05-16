@@ -78,7 +78,7 @@ export class DestinationController {
         await this.destinationRepository.getDestinationById(
           id
         );
-      if (result.length === 0) {
+      if (!result) {
         return res.status(404).json({
           error: 'Destination not found',
           details: `No destination exists with id: ${id}`
@@ -111,12 +111,6 @@ export class DestinationController {
         await this.destinationRepository.getDestinationByTripId(
           tripId
         );
-      if (result.length === 0) {
-        return res.status(404).json({
-          error: 'Destination not found',
-          details: `No destination exists with trip id: ${tripId}`
-        });
-      }
       return res
         .status(200)
         .json(result);
