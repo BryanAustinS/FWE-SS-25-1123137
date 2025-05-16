@@ -36,11 +36,6 @@ How it works
 4. This image is displayed as the trip's cover photo on the home page
 5. If the API call fails, a default backup image is used instead
 
-
-## 🏗️ Project Structure
-
-
-
 ### Frontend Routes
 
 | Route | Component | Description |
@@ -89,16 +84,15 @@ How it works
 ### How to get the API Key
 1. Go to unsplash.com
 2. Log in or create a new account
-3. Click the burger menu on the right side and click Developers/API or go to unsplash.com/developers
+3. Click the burger menu on the right side, then click Developers/API OR directly go to unsplash.com/developers
 4. Open "Your apps"
 5. Click "New Application" and accept the API Use and Guidelines
 6. Write in your application name and description
-    Example: 
-    FWE Trip Planning App
-
-    An app to plan trip
-7. Scroll down and copy both Access Key and Secret Key
-8. Back in the IDE, create a new .env file in root and paste in the API Keys like this:
+   Example: 
+   - App name: FWE Trip Planning App 
+   - Description: An app to plan trip
+7. At the bottom of the page, copy both Access Key and Secret Key
+8. In the IDE, create a new .env file in root and paste in the API Keys like this:
    ```bash
     UNSPLASH_ACCESS_KEY="ACCESS_KEY"
     UNSPLASH_SECRET_KEY="SECRET_KEY"
@@ -109,7 +103,13 @@ How it works
 2. Log in using Github or create a new account
 3. Create a new Organization or click an existing one
 4. Create a New Project and type in the name and password
-
+5. In the project page, click "Connect" in the header middle section of the page
+6. Copy URL in the Session pooler. It looks similar to this: postgresql://postgres.[PROJECT_ID]:[YOUR-PASSWORD]@aws-0-eu-central-1.pooler.supabase.com:5432/postgres
+7. In the .env file, paste the URL and add the port number: 
+   ```bash
+   PORT=3000
+   DATABASE_URL="[URL]"
+   ```
 ### Backend Setup
 1. Clone the repository
    ```bash
@@ -157,8 +157,7 @@ How it works
 ## 🧪 Testing
 
 ### Backend Testing with Postman
-1. Import the included Postman collection
-    https://bryanaustin.postman.co/workspace/Bryan-Austin's-Workspace~3591a0af-516f-4c27-89ed-7e6f5b66beb6/collection/44118307-beabb353-c46c-4df0-b759-26c86a173d9e?action=share&creator=44118307
+1. Import the included Postman collection from this [link](https://bryanaustin.postman.co/workspace/Bryan-Austin's-Workspace~3591a0af-516f-4c27-89ed-7e6f5b66beb6/collection/44118307-beabb353-c46c-4df0-b759-26c86a173d9e?action=share&creator=44118307)
 2. Execute the collection to run all tests
 
 ## 📊 Data Relationships
@@ -172,6 +171,7 @@ How it works
 - Node.js, Express, TypeScript
 - Drizzle ORM, PostgreSQL
 - OpenAPI/Swagger for API documentation
+- Supabase for Backend-as-a-Service
 
 ### Frontend
 - React, TypeScript, Vite
