@@ -19,29 +19,24 @@ By Bryan Austin Suharta (1123137)
 - Update destination details
 - Delete destinations
 
-### User Interface
-- Responsive design using Mantine UI components
-- Modal forms for creating and updating data
-- Empty state handling with appropriate messages and actions
-- Loading indicators during data fetching
+### Freestyle 1 (without API)
+I implemented a sorting feature when viewing all the trips.
+
+### Freestyle 2 (with API)
+
+
 
 ## 🏗️ Project Structure
 
-### Backend
-The backend follows a modular architecture with:
-- Controllers for handling HTTP requests
-- Services for business logic
-- Models for data structure
-- Middleware for request processing
-- Database layer with Drizzle ORM
 
-### Frontend
-The frontend is built with:
-- React for UI components
-- TypeScript for type safety
-- Vite for fast development
-- Mantine UI for component styling
-- React Router for navigation
+
+### Frontend Routes
+
+| Route | Component | Description |
+|-------|-----------|-------------|
+| `/` | Redirect | Automatically redirects to `/home` |
+| `/home` | `<HomePage />` | Displays the main dashboard with all trips |
+| `/trip/:id` | `<TripDetailsPage />` | Shows detailed view of a specific trip and its destinations |
 
 ## 🔄 API Routes
 
@@ -154,13 +149,6 @@ The frontend is built with:
 1. Import the included Postman collection
     https://bryanaustin.postman.co/workspace/Bryan-Austin's-Workspace~3591a0af-516f-4c27-89ed-7e6f5b66beb6/collection/44118307-beabb353-c46c-4df0-b759-26c86a173d9e?action=share&creator=44118307
 2. Execute the collection to run all tests
-
-### Manual Testing Steps
-1. Create a trip using the "Create Trip" request
-2. Verify the trip was created using "Get All Trips"
-3. Create a destination for the trip using "Create Destination" (using the trip ID)
-4. Test searching trips and destinations
-5. Test updating and deleting operations
 
 ## 📊 Data Relationships
 - Each trip can have multiple destinations (one-to-many relationship)
