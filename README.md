@@ -1,10 +1,6 @@
 # Trip Planner
 
-A full-stack web application for planning and managing trips with their destinations.
-
-## 📋 Overview
-
-Trip Planner allows users to create and manage trips along with their associated destinations. The application provides an intuitive interface for trip management with features like searching, sorting, and filtering of trips and destinations.
+By Bryan Austin Suharta (1123137)
 
 ## ✨ Features
 
@@ -81,12 +77,38 @@ The frontend is built with:
 - Node.js (v18 or later)
 - PostgreSQL (v14 or later)
 - npm or yarn
+- API Key
+- Database URL from Supabase
+
+### How to get the API Key
+1. Go to unsplash.com
+2. Log in or create a new account
+3. Click the burger menu on the right side and click Developers/API or go to unsplash.com/developers
+4. Open "Your apps"
+5. Click "New Application" and accept the API Use and Guidelines
+6. Write in your application name and description
+    Example: 
+    FWE Trip Planning App
+
+    An app to plan trip
+7. Scroll down and copy both Access Key and Secret Key
+8. Back in the IDE, create a new .env file in root and paste in the API Keys like this:
+   ```bash
+    UNSPLASH_ACCESS_KEY="ACCESS_KEY"
+    UNSPLASH_SECRET_KEY="SECRET_KEY"
+   ```
+
+### How to get the Database URL
+1. Go to supabase.com
+2. Log in using Github or create a new account
+3. Create a new Organization or click an existing one
+4. Create a New Project and type in the name and password
 
 ### Backend Setup
 1. Clone the repository
    ```bash
-   git clone https://github.com/yourusername/trip-planner.git
-   cd trip-planner/backend
+   git clone https://code.fbi.h-da.de/bryanaustin.suharta/FWE-SS-25-1123137.git
+   cd FWE-SS-25-1123137/backend
    ```
 
 2. Install dependencies
@@ -130,8 +152,8 @@ The frontend is built with:
 
 ### Backend Testing with Postman
 1. Import the included Postman collection
-2. Set up environment variables in Postman
-3. Execute the collection to run all tests
+    https://bryanaustin.postman.co/workspace/Bryan-Austin's-Workspace~3591a0af-516f-4c27-89ed-7e6f5b66beb6/collection/44118307-beabb353-c46c-4df0-b759-26c86a173d9e?action=share&creator=44118307
+2. Execute the collection to run all tests
 
 ### Manual Testing Steps
 1. Create a trip using the "Create Trip" request
@@ -162,8 +184,3 @@ The frontend is built with:
 - ESLint and Prettier for code formatting
 - Postman for API testing
 
-## 📝 License
-MIT
-
-## 👥 Contributing
-Contributions, issues, and feature requests are welcome!
