@@ -25,8 +25,7 @@ export const updateDestinationSchema =
       .min(1)
       .max(256)
       .optional(),
-    nights: z
-      .number(),
+    nights: z.number(),
     activities: z
       .array(z.string())
       .optional(),

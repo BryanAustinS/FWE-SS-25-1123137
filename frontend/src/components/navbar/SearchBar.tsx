@@ -40,7 +40,7 @@ const SearchBar = () => {
           )
         : null
     );
-  const adjustDate = (date : Date) => {
+  const adjustDate = (date: Date) => {
     return new Date(
       date.getFullYear(),
       date.getMonth(),
@@ -49,7 +49,7 @@ const SearchBar = () => {
       0,
       0
     );
-  }
+  };
 
   const [searchType, setSearchType] =
     useState(
@@ -64,7 +64,11 @@ const SearchBar = () => {
     setSearchDate(
       searchParams.get('date')
         ? adjustDate(
-            new Date(searchParams.get('date') as string)
+            new Date(
+              searchParams.get(
+                'date'
+              ) as string
+            )
           )
         : null
     );
@@ -124,11 +128,13 @@ const SearchBar = () => {
           }
         }}
         rightSection={
-          <ActionIcon onClick={handleSearch}>
+          <ActionIcon
+            onClick={handleSearch}
+          >
             <IconSearch size={16} />
           </ActionIcon>
         }
-        style={{ minWidth: '400px'}}
+        style={{ minWidth: '400px' }}
       />
 
       <Popover

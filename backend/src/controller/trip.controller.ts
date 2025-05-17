@@ -51,7 +51,10 @@ export class TripController {
       );
       return res.status(500).json({
         error: 'Failed to create trip',
-        details: error instanceof Error ? error.message : 'Unknown error occurred',
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Unknown error occurred',
       });
     }
   };
@@ -63,7 +66,6 @@ export class TripController {
     try {
       const result =
         await this.tripRepository.getAllTrip();
-      
 
       return res
         .status(200)
@@ -76,7 +78,10 @@ export class TripController {
       return res.status(500).json({
         error:
           'Failed to fetch all trips',
-        details: error instanceof Error ? error.message : 'Unknown error occurred',
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Unknown error occurred',
       });
     }
   };
@@ -95,13 +100,12 @@ export class TripController {
       if (!result) {
         return res.status(404).json({
           error: 'Trip not found',
-          details: `No trip exists with id: ${id}`
+          details: `No trip exists with id: ${id}`,
         });
       }
       return res
         .status(200)
         .json(result);
-
     } catch (error: unknown) {
       console.error(
         'Error fetching trip by id: ',
@@ -110,7 +114,10 @@ export class TripController {
       return res.status(500).json({
         error:
           'Failed to fetch trip by id',
-        details: error instanceof Error ? error.message : 'Unknown error occurred',
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Unknown error occurred',
       });
     }
   };
@@ -147,7 +154,10 @@ export class TripController {
       return res.status(500).json({
         error:
           'Failed to fetch trip by name',
-        details: error instanceof Error ? error.message : 'Unknown error occurred',
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Unknown error occurred',
       });
     }
   };
@@ -186,7 +196,10 @@ export class TripController {
       return res.status(500).json({
         error:
           'Failed to fetch trip by name',
-        details: error instanceof Error ? error.message : 'Unknown error occurred',
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Unknown error occurred',
       });
     }
   };
@@ -208,13 +221,18 @@ export class TripController {
         });
       }
 
-    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-    if (!dateRegex.test(date) || isNaN(Date.parse(date))) {
-      return res.status(400).json({
-        error: 'Invalid date format',
-        details: 'Date must be in YYYY-MM-DD format'
-      });
-    }
+      const dateRegex =
+        /^\d{4}-\d{2}-\d{2}$/;
+      if (
+        !dateRegex.test(date) ||
+        isNaN(Date.parse(date))
+      ) {
+        return res.status(400).json({
+          error: 'Invalid date format',
+          details:
+            'Date must be in YYYY-MM-DD format',
+        });
+      }
 
       const result =
         await this.tripRepository.getTripByDate(
@@ -231,7 +249,10 @@ export class TripController {
       return res.status(500).json({
         error:
           'Failed to fetch trip by name',
-        details: error instanceof Error ? error.message : 'Unknown error occurred',
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Unknown error occurred',
       });
     }
   };
@@ -251,7 +272,7 @@ export class TripController {
       if (trip.length === 0) {
         return res.status(404).json({
           error: 'Trip not found',
-          details: `No trip exists with id: ${id}`
+          details: `No trip exists with id: ${id}`,
         });
       }
 
@@ -285,7 +306,10 @@ export class TripController {
       );
       return res.status(500).json({
         error: 'Failed to update trip',
-        details: error instanceof Error ? error.message : 'Unknown error occurred',
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Unknown error occurred',
       });
     }
   };
@@ -304,7 +328,7 @@ export class TripController {
       if (trip.length === 0) {
         return res.status(404).json({
           error: 'Trip not found',
-          details: `No trip exists with id: ${id}`
+          details: `No trip exists with id: ${id}`,
         });
       }
 
@@ -322,7 +346,10 @@ export class TripController {
       );
       return res.status(500).json({
         error: 'Failed to delete trip',
-        details: error instanceof Error ? error.message : 'Unknown error occurred',
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Unknown error occurred',
       });
     }
   };

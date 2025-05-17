@@ -38,7 +38,10 @@ export class DestinationController {
       return res.status(500).json({
         error:
           'Failed to create destination',
-        details: error instanceof Error ? error.message : 'Unknown error occurred',
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Unknown error occurred',
       });
     }
   };
@@ -62,7 +65,10 @@ export class DestinationController {
       return res.status(500).json({
         error:
           'Failed to fetch all destinations',
-        details: error instanceof Error ? error.message : 'Unknown error occurred',
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Unknown error occurred',
       });
     }
   };
@@ -80,8 +86,9 @@ export class DestinationController {
         );
       if (!result) {
         return res.status(404).json({
-          error: 'Destination not found',
-          details: `No destination exists with id: ${id}`
+          error:
+            'Destination not found',
+          details: `No destination exists with id: ${id}`,
         });
       }
       return res
@@ -95,7 +102,10 @@ export class DestinationController {
       return res.status(500).json({
         error:
           'Failed to fetch destination by id',
-        details: error instanceof Error ? error.message : 'Unknown error occurred',
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Unknown error occurred',
       });
     }
   };
@@ -122,7 +132,10 @@ export class DestinationController {
       return res.status(500).json({
         error:
           'Failed to fetch destination by trip id',
-        details: error instanceof Error ? error.message : 'Unknown error occurred',
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Unknown error occurred',
       });
     }
   };
@@ -159,7 +172,10 @@ export class DestinationController {
       return res.status(500).json({
         error:
           'Failed to fetch destination by name',
-        details: error instanceof Error ? error.message : 'Unknown error occurred',
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Unknown error occurred',
       });
     }
   };
@@ -196,7 +212,10 @@ export class DestinationController {
       return res.status(500).json({
         error:
           'Failed to fetch destination containing name',
-        details: error instanceof Error ? error.message : 'Unknown error occurred',
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Unknown error occurred',
       });
     }
   };
@@ -215,8 +234,9 @@ export class DestinationController {
         );
       if (destination.length === 0) {
         return res.status(404).json({
-          error: 'Destination not found',
-          details: `No Destination exists with id: ${id}`
+          error:
+            'Destination not found',
+          details: `No Destination exists with id: ${id}`,
         });
       }
 
@@ -241,7 +261,10 @@ export class DestinationController {
       return res.status(500).json({
         error:
           'Failed to update destination',
-        details: error instanceof Error ? error.message : 'Unknown error occurred',
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Unknown error occurred',
       });
     }
   };
@@ -258,8 +281,9 @@ export class DestinationController {
         );
       if (result.length === 0) {
         return res.status(404).json({
-          error: 'Destination not found',
-          details: `No destination exists with id: ${id}`
+          error:
+            'Destination not found',
+          details: `No destination exists with id: ${id}`,
         });
       }
       return res
@@ -273,7 +297,10 @@ export class DestinationController {
       return res.status(500).json({
         error:
           'Failed to delete destination',
-        details: error instanceof Error ? error.message : 'Unknown error occurred',
+        details:
+          error instanceof Error
+            ? error.message
+            : 'Unknown error occurred',
       });
     }
   };
