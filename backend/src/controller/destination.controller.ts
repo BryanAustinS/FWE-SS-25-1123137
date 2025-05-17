@@ -84,7 +84,7 @@ export class DestinationController {
         await this.destinationRepository.getDestinationById(
           id
         );
-      if (!result) {
+      if (result.length === 0) {
         return res.status(404).json({
           error:
             'Destination not found',
