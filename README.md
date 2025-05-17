@@ -133,7 +133,7 @@ postgresql://postgres.[PROJECT_ID]:[YOUR-PASSWORD]@aws-0-eu-central-1.pooler.sup
 
 4. Run database migrations
    ```bash
-   npm run migrate
+   npm run db:migrate
    ```
 
 5. Start the development server
@@ -160,8 +160,11 @@ postgresql://postgres.[PROJECT_ID]:[YOUR-PASSWORD]@aws-0-eu-central-1.pooler.sup
 ## 🧪 Testing
 
 ### Backend Testing with Postman
-1. Import the included Postman collection from this [link](https://bryanaustin.postman.co/workspace/Bryan-Austin's-Workspace~3591a0af-516f-4c27-89ed-7e6f5b66beb6/collection/44118307-beabb353-c46c-4df0-b759-26c86a173d9e?action=share&creator=44118307)
+1. Import the included Postman collection from this [link](https://bryanaustin.postman.co/workspace/Bryan-Austin's-Workspace~3591a0af-516f-4c27-89ed-7e6f5b66beb6/collection/44118307-beabb353-c46c-4df0-b759-26c86a173d9e?action=share&creator=44118307) 
 2. Execute the collection to run all tests
+
+(If the link doesn't work, you can use the JSON Postman test file is placed in backend/test/Trip Planner API Tests.postman_collection.json)
+
 
 ## 📊 Data Relationships
 - Each trip can have multiple destinations (one-to-many relationship)
