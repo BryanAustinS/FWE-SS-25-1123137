@@ -18,7 +18,6 @@ import {
   IconSearch,
   IconCalendarEvent,
   IconFilter,
-  IconX,
 } from '@tabler/icons-react';
 import { DateInput } from '@mantine/dates';
 
@@ -41,6 +40,17 @@ const SearchBar = () => {
           )
         : null
     );
+  const adjustDate = (date : Date) => {
+    return new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      12,
+      0,
+      0
+    );
+  }
+
   const [searchType, setSearchType] =
     useState(
       searchParams.get('type') || 'all'
@@ -53,10 +63,8 @@ const SearchBar = () => {
     );
     setSearchDate(
       searchParams.get('date')
-        ? new Date(
-            searchParams.get(
-              'date'
-            ) as string
+        ? adjustDate(
+            new Date(searchParams.get('date') as string)
           )
         : null
     );
@@ -96,13 +104,6 @@ const SearchBar = () => {
     }
 
     setOpened(false);
-  };
-
-  const clearSearch = () => {
-    setSearchTerm('');
-    setSearchDate(null);
-    setSearchType('all');
-    navigate('/home');
   };
 
   return (

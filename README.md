@@ -5,19 +5,19 @@ By Bryan Austin Suharta (1123137)
 ## ✨ Features
 
 ### Trip Management
+- In the header, users are able to **search for a trip** or **create a new trip**
+- Trips can be searched based on its name, its destination's name or date
 - Create new trips with name, description, date range, and participant count
-- View a list of all trips
-- Search trips by name or date
-- Sort trips by name or date
-- Update trip details
-- Delete trips
+- In the home page, users can **view all of their created trips**
+- Users are able to **sort all of the trips** by name or date
+- Users are also able to **view details of the trip or delete them**
+- In the trip details page, user are able to **update or delete the trip**
 
 ### Destination Management
+- In the trip details page, user are able to **add a new destination** to their trip
 - Add destinations to trips with name, number of nights, and activities
-- View destinations associated with a specific trip
-- Search destinations by name
-- Update destination details
-- Delete destinations
+- Users can view their destinations to a trip in form of a table
+- For each destination, users are able to update or delete the trip
 
 ### Freestyle 1 (without API)
 I implemented a sorting feature when viewing all the trips. User is able to sort Trips 
@@ -41,7 +41,7 @@ How it works
 | Route | Component | Description |
 |-------|-----------|-------------|
 | `/` | Redirect | Automatically redirects to `/home` |
-| `/home` | `<HomePage />` | Displays the main dashboard with all trips |
+| `/home` | `<HomePage />` | Displays the main dashboard with all trips. |
 | `/trip/:id` | `<TripDetailsPage />` | Shows detailed view of a specific trip and its destinations |
 
 ## 🔄 API Routes
@@ -104,7 +104,10 @@ How it works
 3. Create a new Organization or click an existing one
 4. Create a New Project and type in the name and password
 5. In the project page, click "Connect" in the header middle section of the page
-6. Copy URL in the Session pooler. It looks similar to this: postgresql://postgres.[PROJECT_ID]:[YOUR-PASSWORD]@aws-0-eu-central-1.pooler.supabase.com:5432/postgres
+6. Copy URL in the Session pooler. It looks similar to this: 
+```
+postgresql://postgres.[PROJECT_ID]:[YOUR-PASSWORD]@aws-0-eu-central-1.pooler.supabase.com:5432/postgres
+```
 7. In the .env file, paste the URL and add the port number: 
    ```bash
    PORT=3000
